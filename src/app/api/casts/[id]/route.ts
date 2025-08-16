@@ -38,12 +38,17 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: Record<string, string | string[]> }
 ) {
-  try {
-    const { id } = params
+  const raw = params.id;
+  const id = Array.isArray(raw) ? raw[0] : raw;
 
+  if (!id) {
+    return NextResponse.json({ error: 'Missing id' }, { status: 400 });
+  }
+
+  try {
     // キャストが存在するかチェック
     const existingCast = await prisma.cast.findUnique({
       where: { id }
