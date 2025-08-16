@@ -54,7 +54,7 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
   }
 
   return (
-    <div className={`grid ${gridCols[columns as keyof typeof gridCols]} gap-6`}>
+    <div className={`grid ${gridCols[columns as keyof typeof gridCols]} gap-8 lg:gap-10`}>
       {options.map((option, index) => {
         const isSelected = selectedValue === option.value
         const isAnimated = animatedOptions.includes(`option-${index}`)

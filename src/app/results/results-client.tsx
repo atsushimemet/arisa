@@ -146,15 +146,15 @@ export function ResultsClient() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-primary/30 to-dark-primary/70" />
       
       <div className="relative z-10">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-6 lg:px-8 py-12 lg:py-16">
           {/* Header */}
-          <div className={`text-center mb-12 transition-all duration-1000 ${isAnimated ? 'animate-slide-in-down' : 'opacity-0'}`}>
-            <h1 className="text-5xl font-bold mb-8 holographic-text animate-holographic">
+          <div className={`text-center mb-16 lg:mb-20 transition-all duration-1000 ${isAnimated ? 'animate-slide-in-down' : 'opacity-0'}`}>
+            <h1 className="text-5xl font-bold mb-10 holographic-text animate-holographic">
               検索結果
             </h1>
             
             {/* Search criteria badges */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <div className="flex flex-wrap justify-center gap-6 mb-10">
               {area && (
                 <Card variant="glass" className="px-6 py-3 flex items-center gap-2" glow borderGlow="cyan">
                   <MapPin className="w-5 h-5 text-neon-cyan" />
@@ -186,7 +186,7 @@ export function ResultsClient() {
           </div>
 
           {/* Action buttons */}
-          <div className={`flex flex-wrap justify-center gap-4 mb-12 transition-all duration-1000 delay-300 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
+          <div className={`flex flex-wrap justify-center gap-6 mb-16 lg:mb-20 transition-all duration-1000 delay-300 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
             <Button
               onClick={handleBackToHome}
               variant="outline"
@@ -207,7 +207,7 @@ export function ResultsClient() {
 
           {/* Results Grid */}
           {casts.length > 0 ? (
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
               {casts.map((cast) => (
                 <Card
                   key={cast.id}
