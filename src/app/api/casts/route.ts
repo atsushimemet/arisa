@@ -9,10 +9,14 @@ export async function GET(request: NextRequest) {
     const area = searchParams.get('area') as Area | null
     const serviceType = searchParams.get('serviceType') as ServiceType | null
     const budgetRange = searchParams.get('budgetRange') as BudgetRange | null
+    const includeInactive = searchParams.get('includeInactive') === 'true'
 
     // フィルター条件を構築
-    const where: Prisma.CastWhereInput = {
-      isActive: true
+    const where: Prisma.CastWhereInput = {}
+
+    // adminのリクエストの場合、非アクティブも含める
+    if (!includeInactive) {
+      where.isActive = true
     }
 
     if (area) {

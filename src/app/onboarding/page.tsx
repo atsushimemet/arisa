@@ -4,7 +4,8 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { OnboardingStep } from '@/components/onboarding/OnboardingStep'
 import { SelectionGrid } from '@/components/onboarding/SelectionGrid'
-import { Area, ServiceType, BudgetRange, AREA_LABELS, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, OnboardingData } from '@/types'
+import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, OnboardingData } from '@/types'
+import { useAreas } from '@/hooks/useAreas'
 
 const TOTAL_STEPS = 4
 
@@ -12,8 +13,9 @@ export default function OnboardingPage() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [data, setData] = useState<OnboardingData>({})
+  const { areaOptions: dynamicAreaOptions, loading: areasLoading } = useAreas()
 
-  const areaOptions = Object.entries(AREA_LABELS).map(([value, label]) => ({
+  const areaOptions = dynamicAreaOptions.map(({ value, label }) => ({
     value,
     label,
     icon: getAreaIcon(value as Area)
@@ -155,6 +157,17 @@ export default function OnboardingPage() {
       default:
         return null
     }
+  }
+
+  if (areasLoading) {
+    return (
+      <div className="min-h-screen bg-dark-gradient flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-glow-primary mx-auto mb-4"></div>
+          <p className="text-gray-300 text-lg">エリア情報を読み込み中...</p>
+        </div>
+      </div>
+    )
   }
 
   return renderStepContent()
