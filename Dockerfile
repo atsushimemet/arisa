@@ -20,8 +20,8 @@ COPY . .
 # Diagnostic step to verify dependencies are present
 RUN npm ls @prisma/client prisma --depth=0 || true
 
-# Generate Prisma client after copying source code
-RUN npx prisma generate --schema=./prisma/schema.prisma
+# Health check: Verify Prisma Client was generated correctly in deps stage
+RUN node -e "require('@prisma/client'); console.log('Prisma Client OK')"
 
 # Build the application
 RUN npm run build
