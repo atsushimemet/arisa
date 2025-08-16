@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Cast, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
+import { MobileConsole, MobileConsoleToggle } from '@/components/MobileConsole'
 
 export default function AdminPage() {
   const router = useRouter()
@@ -13,6 +14,7 @@ export default function AdminPage() {
   const [casts, setCasts] = useState<Cast[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isDebugConsoleOpen, setIsDebugConsoleOpen] = useState(false)
 
   useEffect(() => {
     fetchCasts()
@@ -123,6 +125,13 @@ export default function AdminPage() {
               variant="secondary"
             >
               エリア管理
+            </Button>
+            <Button 
+              onClick={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)}
+              variant="outline"
+              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black"
+            >
+              🐛 デバッグコンソール
             </Button>
             <Button 
               onClick={() => router.push('/')}
@@ -258,6 +267,12 @@ export default function AdminPage() {
           )}
         </div>
       </div>
+
+      {/* デバッグコンソール */}
+      <MobileConsole 
+        isOpen={isDebugConsoleOpen} 
+        onToggle={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)} 
+      />
     </div>
   )
 }

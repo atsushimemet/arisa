@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, Cast } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
+import { MobileConsole } from '@/components/MobileConsole'
 
 interface FormData {
   name: string
@@ -40,6 +41,7 @@ export default function EditCastPage() {
     budgetRange: ''
   })
   const [loading, setLoading] = useState(false)
+  const [isDebugConsoleOpen, setIsDebugConsoleOpen] = useState(false)
   const [initialLoading, setInitialLoading] = useState(true)
   const [errors, setErrors] = useState<FormErrors>({})
   const [cast, setCast] = useState<Cast | null>(null)
@@ -216,12 +218,21 @@ export default function EditCastPage() {
             <h1 className="text-4xl font-bold glow-text mb-2">キャスト情報を編集</h1>
             <p className="text-gray-300">{cast.name} の情報を更新</p>
           </div>
-          <Button 
-            onClick={() => router.push('/admin')}
-            variant="outline"
-          >
-            管理者ページに戻る
-          </Button>
+          <div className="flex gap-4">
+            <Button 
+              onClick={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)}
+              variant="outline"
+              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black"
+            >
+              🐛 デバッグコンソール
+            </Button>
+            <Button 
+              onClick={() => router.push('/admin')}
+              variant="outline"
+            >
+              管理者ページに戻る
+            </Button>
+          </div>
         </div>
 
         {/* フォーム */}
@@ -392,6 +403,12 @@ export default function EditCastPage() {
           </Card>
         </div>
       </div>
+
+      {/* デバッグコンソール */}
+      <MobileConsole 
+        isOpen={isDebugConsoleOpen} 
+        onToggle={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)} 
+      />
     </div>
   )
 }

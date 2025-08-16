@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { AreaMaster } from '@/types'
-import { mobileLog } from '@/components/MobileConsole'
+import { mobileLog, MobileConsole } from '@/components/MobileConsole'
 
 interface FormData {
   key: string
@@ -33,6 +33,7 @@ export default function AreasManagementPage() {
   })
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [submitting, setSubmitting] = useState(false)
+  const [isDebugConsoleOpen, setIsDebugConsoleOpen] = useState(false)
 
   useEffect(() => {
     fetchAreas()
@@ -262,6 +263,13 @@ export default function AreasManagementPage() {
               新しいエリアを追加
             </Button>
             <Button 
+              onClick={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)}
+              variant="outline"
+              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black"
+            >
+              🐛 デバッグコンソール
+            </Button>
+            <Button 
               onClick={() => router.push('/admin')}
               variant="outline"
             >
@@ -439,6 +447,12 @@ export default function AreasManagementPage() {
           )}
         </div>
       </div>
+
+      {/* デバッグコンソール */}
+      <MobileConsole 
+        isOpen={isDebugConsoleOpen} 
+        onToggle={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)} 
+      />
     </div>
   )
 }

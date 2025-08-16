@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
+import { MobileConsole } from '@/components/MobileConsole'
 
 interface FormData {
   name: string
@@ -37,6 +38,7 @@ export default function AddCastPage() {
     budgetRange: ''
   })
   const [loading, setLoading] = useState(false)
+  const [isDebugConsoleOpen, setIsDebugConsoleOpen] = useState(false)
   const [errors, setErrors] = useState<FormErrors>({})
 
   const validateForm = (): boolean => {
@@ -163,12 +165,21 @@ export default function AddCastPage() {
             <h1 className="text-4xl font-bold glow-text mb-2">新しいキャストを追加</h1>
             <p className="text-gray-300">キャスト情報を入力してください</p>
           </div>
-          <Button 
-            onClick={() => router.push('/admin')}
-            variant="outline"
-          >
-            管理者ページに戻る
-          </Button>
+          <div className="flex gap-4">
+            <Button 
+              onClick={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)}
+              variant="outline"
+              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black"
+            >
+              🐛 デバッグコンソール
+            </Button>
+            <Button 
+              onClick={() => router.push('/admin')}
+              variant="outline"
+            >
+              管理者ページに戻る
+            </Button>
+          </div>
         </div>
 
         {/* フォーム */}
@@ -339,6 +350,12 @@ export default function AddCastPage() {
           </Card>
         </div>
       </div>
+
+      {/* デバッグコンソール */}
+      <MobileConsole 
+        isOpen={isDebugConsoleOpen} 
+        onToggle={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)} 
+      />
     </div>
   )
 }
