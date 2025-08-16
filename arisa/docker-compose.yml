@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: arisa-postgres
+    environment:
+      POSTGRES_DB: arisa
+      POSTGRES_USER: arisa_user
+      POSTGRES_PASSWORD: arisa_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - arisa-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: arisa-app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://arisa_user:arisa_password@postgres:5432/arisa
+      NEXTAUTH_SECRET: your-secret-key-here
+      NEXTAUTH_URL: http://localhost:3000
+    depends_on:
+      - postgres
+    networks:
+      - arisa-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+
+volumes:
+  postgres_data:
+
+networks:
+  arisa-network:
+    driver: bridge

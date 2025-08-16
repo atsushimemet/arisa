@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cast {
+  id          String   @id @default(cuid())
+  name        String
+  snsLink     String
+  storeLink   String?
+  area        Area
+  serviceType ServiceType
+  budgetRange BudgetRange
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("casts")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+enum Area {
+  SHIBUYA
+  SHINJUKU
+  GINZA
+  ROPPONGI
+  IKEBUKURO
+  AKASAKA
+  KABUKICHO
+  OTHER
+}
+
+enum ServiceType {
+  KYABA
+  GIRLS_BAR
+  SNACK
+  LOUNGE
+  CLUB
+  OTHER
+}
+
+enum BudgetRange {
+  UNDER_10K
+  FROM_10K_TO_20K
+  FROM_20K_TO_30K
+  FROM_30K_TO_50K
+  OVER_50K
+}
