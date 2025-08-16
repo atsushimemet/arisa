@@ -15,6 +15,15 @@ interface FormData {
   budgetRange: BudgetRange | ''
 }
 
+interface FormErrors {
+  name?: string
+  snsLink?: string
+  storeLink?: string
+  area?: string
+  serviceType?: string
+  budgetRange?: string
+}
+
 export default function AddCastPage() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData>({
@@ -26,10 +35,10 @@ export default function AddCastPage() {
     budgetRange: ''
   })
   const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState<Partial<FormData>>({})
+  const [errors, setErrors] = useState<FormErrors>({})
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {}
+    const newErrors: FormErrors = {}
 
     if (!formData.name.trim()) {
       newErrors.name = 'キャスト名は必須です'
