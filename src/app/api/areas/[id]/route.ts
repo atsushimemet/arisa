@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { Area } from '@/types'
 
 export async function GET(
   _req: Request,
@@ -108,7 +109,7 @@ export async function DELETE(
 
     // このエリアを使用しているキャストがあるかチェック
     const castsUsingArea = await prisma.cast.findMany({
-      where: { area: existingArea.key as any }
+      where: { area: existingArea.key as Area }
     })
 
     if (castsUsingArea.length > 0) {
