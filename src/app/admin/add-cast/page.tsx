@@ -331,7 +331,6 @@ export default function AddCastPage() {
                   variant="primary"
                   size="lg"
                   disabled={loading}
-                  glow={!loading}
                   className="flex-1"
                 >
                   {loading ? '追加中...' : 'キャストを追加'}

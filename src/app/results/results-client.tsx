@@ -73,7 +73,7 @@ export function ResultsClient() {
         <div className="absolute inset-0 particle-bg opacity-40" />
         
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-          <Card variant="cyber" className="text-center p-12 max-w-md" glow borderGlow="cyan">
+          <Card variant="glass" className="text-center p-12 max-w-md">
             {/* Animated loading spinner */}
             <div className="relative mb-8">
               <div className="w-20 h-20 border-4 border-neon-cyan/30 rounded-full mx-auto"></div>
@@ -108,7 +108,7 @@ export function ResultsClient() {
         <div className="absolute inset-0 particle-bg opacity-30" />
         
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-          <Card variant="gaming" className="text-center max-w-md p-12" glow borderGlow="orange">
+          <Card variant="elevated" className="text-center max-w-md p-12">
             <div className="text-8xl mb-8 animate-bounce-glow">😔</div>
             <h2 className="text-3xl font-bold text-white mb-6 glow-text-orange">エラーが発生しました</h2>
             <p className="text-gray-300 mb-8 leading-relaxed">{error}</p>
@@ -116,10 +116,9 @@ export function ResultsClient() {
             <div className="flex flex-col space-y-4">
               <Button 
                 onClick={handleRetry} 
-                variant="gaming" 
+                variant="primary" 
                 size="lg"
                 icon={<RefreshCw className="w-5 h-5" />}
-                glow
               >
                 再試行
               </Button>
@@ -156,19 +155,19 @@ export function ResultsClient() {
             {/* Search criteria badges */}
             <div className="flex flex-wrap justify-center gap-6 mb-10">
               {area && (
-                <Card variant="glass" className="px-6 py-3 flex items-center gap-2" glow borderGlow="cyan">
+                <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-neon-cyan" />
                   <span className="text-neon-cyan font-semibold">{getAreaLabel(area)}</span>
                 </Card>
               )}
               {serviceType && (
-                <Card variant="glass" className="px-6 py-3 flex items-center gap-2" glow borderGlow="purple">
+                <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <Star className="w-5 h-5 text-neon-purple" />
                   <span className="text-neon-purple font-semibold">{SERVICE_TYPE_LABELS[serviceType]}</span>
                 </Card>
               )}
               {budgetRange && (
-                <Card variant="glass" className="px-6 py-3 flex items-center gap-2" glow borderGlow="green">
+                <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <DollarSign className="w-5 h-5 text-laser-green" />
                   <span className="text-laser-green font-semibold">{BUDGET_RANGE_LABELS[budgetRange]}</span>
                 </Card>
@@ -197,7 +196,7 @@ export function ResultsClient() {
             </Button>
             <Button
               onClick={handleBackToOnboarding}
-              variant="cyber"
+              variant="outline"
               icon={<Filter className="w-5 h-5" />}
               className="px-6 py-3"
             >
@@ -211,10 +210,8 @@ export function ResultsClient() {
               {casts.map((cast) => (
                 <Card
                   key={cast.id}
-                  variant="gaming"
+                  variant="elevated"
                   className="p-6 hover:scale-105 transform transition-all duration-300 group"
-                  glow
-                  borderGlow="green"
                   animated
                 >
                   {/* Cast info */}
@@ -243,11 +240,10 @@ export function ResultsClient() {
                     {cast.snsLink && (
                       <Button
                         onClick={() => window.open(cast.snsLink, '_blank')}
-                        variant="neon"
+                        variant="primary"
                         size="sm"
                         className="w-full"
                         icon={<ExternalLink className="w-4 h-4" />}
-                        ripple
                       >
                         SNS で確認
                       </Button>
@@ -266,7 +262,7 @@ export function ResultsClient() {
             </div>
           ) : (
             <div className={`text-center transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
-              <Card variant="cyber" className="p-12 max-w-2xl mx-auto" glow borderGlow="cyan">
+              <Card variant="glass" className="p-12 max-w-2xl mx-auto">
                 <div className="text-8xl mb-8 animate-float">🔍</div>
                 <h2 className="text-3xl font-bold text-white mb-6 glow-text-cyan">
                   該当するキャストが見つかりませんでした
@@ -280,7 +276,6 @@ export function ResultsClient() {
                   onClick={handleBackToOnboarding}
                   variant="primary"
                   size="lg"
-                  glow
                   icon={<Search className="w-5 h-5" />}
                   className="px-12 py-4"
                 >
@@ -294,9 +289,8 @@ export function ResultsClient() {
           <div className="fixed bottom-8 right-8 z-50">
             <Button
               onClick={handleBackToHome}
-              variant="gaming"
-              className="rounded-full p-4 shadow-gaming"
-              glow
+              variant="primary"
+              className="rounded-full p-4"
               icon={<ArrowLeft className="w-6 h-6" />}
             >
               ホームに戻る
