@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased px-4 lg:px-6`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-4 sm:px-6 lg:px-8 font-ios`}
       >
         <MobileConsoleProvider>
           {children}
