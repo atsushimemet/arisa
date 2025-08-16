@@ -17,8 +17,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Ensure Prisma dependencies are available and generate client
-RUN npx prisma --version
+# Generate Prisma client after copying source code
 RUN npx prisma generate --schema=./prisma/schema.prisma
 
 # Build the application
