@@ -8,7 +8,7 @@ echo "Checking if seeding is needed..."
 SEED="${SEED:-}"
 if [ "$SEED" = "true" ]; then
   if [ -f "prisma/seed.ts" ]; then
-    node --loader ts-node/esm prisma/seed.ts
+    npx tsx prisma/seed.ts
   elif [ -f "prisma/seed.js" ]; then
     node prisma/seed.js
   else

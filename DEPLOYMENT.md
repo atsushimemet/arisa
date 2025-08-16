@@ -49,7 +49,8 @@
 1. サイドバーから**Settings** → **Database**を選択
 2. **Connection string**セクションで以下の情報を取得：
    - **URI**: `postgresql://postgres:[YOUR-PASSWORD]@[HOST]:[PORT]/postgres`
-   - この文字列を`DATABASE_URL`として使用
+   - **Session Pooler**: `postgresql://postgres:[YOUR-PASSWORD]@[POOLER-HOST]:[POOLER-PORT]/postgres?pgbouncer=true`
+   - 本番環境では**Session Pooler**の接続文字列を`DATABASE_URL`として使用（推奨）
 
 ### 3. Supabaseでの追加設定
 
@@ -199,8 +200,8 @@ Renderサービスの**Environment**タブで以下の環境変数を設定：
 ### 必須環境変数
 
 ```env
-# データベース
-DATABASE_URL=postgresql://postgres:[PASSWORD]@[SUPABASE_HOST]:[PORT]/postgres
+# データベース（Session Pooler接続を推奨）
+DATABASE_URL=postgresql://postgres:[PASSWORD]@[POOLER-HOST]:[POOLER-PORT]/postgres?pgbouncer=true
 
 # NextAuth設定
 NEXTAUTH_SECRET=your-super-secret-key-for-production-min-32-chars
@@ -208,13 +209,17 @@ NEXTAUTH_URL=https://your-app-name.onrender.com
 
 # Node環境
 NODE_ENV=production
+
+# オプション: シードデータを投入する場合
+SEED=true
 ```
 
 ### 環境変数の詳細説明
 
 #### DATABASE_URL
-- Supabaseから取得したPostgreSQL接続文字列
-- 形式: `postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres`
+- Supabaseから取得したSession Pooler接続文字列（推奨）
+- 形式: `postgresql://postgres:[PASSWORD]@[POOLER-HOST]:[POOLER-PORT]/postgres?pgbouncer=true`
+- 直接接続も可能: `postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres`
 
 #### NEXTAUTH_SECRET
 - 32文字以上のランダムな文字列
