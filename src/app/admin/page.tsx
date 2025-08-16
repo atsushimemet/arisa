@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Cast, AREA_LABELS, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
+import { Cast, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
+import { useAreas } from '@/hooks/useAreas'
 
 export default function AdminPage() {
   const router = useRouter()
+  const { getAreaLabel } = useAreas()
   const [casts, setCasts] = useState<Cast[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -18,7 +20,7 @@ export default function AdminPage() {
 
   const fetchCasts = async () => {
     try {
-      const response = await fetch('/api/casts')
+      const response = await fetch('/api/casts?includeInactive=true')
       if (!response.ok) {
         throw new Error('キャストの取得に失敗しました')
       }
@@ -117,6 +119,12 @@ export default function AdminPage() {
               新しいキャストを追加
             </Button>
             <Button 
+              onClick={() => router.push('/admin/areas')}
+              variant="secondary"
+            >
+              エリア管理
+            </Button>
+            <Button 
               onClick={() => router.push('/')}
               variant="outline"
             >
@@ -185,7 +193,7 @@ export default function AdminPage() {
                   <div className="space-y-2 mb-4">
                     <div className="flex flex-wrap gap-2 mb-2">
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
-                        📍 {AREA_LABELS[cast.area]}
+                        📍 {getAreaLabel(cast.area)}
                       </span>
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
                         🍸 {SERVICE_TYPE_LABELS[cast.serviceType]}
@@ -215,6 +223,14 @@ export default function AdminPage() {
                   </div>
 
                   <div className="flex gap-2">
+                    <Button
+                      onClick={() => router.push(`/admin/edit-cast/${cast.id}`)}
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-glow-primary border-glow-primary hover:bg-glow-primary hover:text-white"
+                    >
+                      編集
+                    </Button>
                     <Button
                       onClick={() => handleToggleActive(cast.id, cast.isActive)}
                       variant={cast.isActive ? "secondary" : "primary"}

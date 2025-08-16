@@ -25,6 +25,18 @@ model Cast {
   @@map("casts")
 }
 
+model AreaMaster {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  label     String
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("area_masters")
+}
+
 model Admin {
   id        String   @id @default(cuid())
   email     String   @unique

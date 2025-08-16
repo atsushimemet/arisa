@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Area, ServiceType, BudgetRange, AREA_LABELS, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, Cast } from '@/types'
+import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, Cast } from '@/types'
+import { useAreas } from '@/hooks/useAreas'
 
 export function ResultsClient() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const { getAreaLabel } = useAreas()
   const [casts, setCasts] = useState<Cast[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -85,7 +87,7 @@ export function ResultsClient() {
           <div className="flex flex-wrap justify-center gap-4 mb-6">
             {area && (
               <span className="bg-dark-accent px-4 py-2 rounded-full text-glow-primary border border-glow-primary">
-                📍 {AREA_LABELS[area]}
+                📍 {getAreaLabel(area)}
               </span>
             )}
             {serviceType && (
@@ -137,7 +139,7 @@ export function ResultsClient() {
                     
                     <div className="flex flex-wrap justify-center gap-2 mb-4">
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
-                        📍 {AREA_LABELS[cast.area]}
+                        📍 {getAreaLabel(cast.area)}
                       </span>
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
                         🍸 {SERVICE_TYPE_LABELS[cast.serviceType]}

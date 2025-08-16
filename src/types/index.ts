@@ -39,6 +39,16 @@ export interface Cast {
   updatedAt: Date
 }
 
+export interface AreaMaster {
+  id: string
+  key: string
+  label: string
+  isActive: boolean
+  sortOrder: number
+  createdAt: Date
+  updatedAt: Date
+}
+
 export interface OnboardingData {
   area?: Area
   serviceType?: ServiceType

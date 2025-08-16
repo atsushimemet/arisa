@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useState, useEffect } from 'react'
+import { useRouter, useParams } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
+import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, Cast } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
 
 interface FormData {
@@ -25,9 +25,12 @@ interface FormErrors {
   budgetRange?: string
 }
 
-export default function AddCastPage() {
+export default function EditCastPage() {
   const router = useRouter()
+  const params = useParams()
+  const castId = params.id as string
   const { areaOptions, loading: areasLoading, error: areasError } = useAreas()
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     snsLink: '',
@@ -37,7 +40,42 @@ export default function AddCastPage() {
     budgetRange: ''
   })
   const [loading, setLoading] = useState(false)
+  const [initialLoading, setInitialLoading] = useState(true)
   const [errors, setErrors] = useState<FormErrors>({})
+  const [cast, setCast] = useState<Cast | null>(null)
+
+  useEffect(() => {
+    if (castId) {
+      fetchCast()
+    }
+  }, [castId])
+
+  const fetchCast = async () => {
+    try {
+      const response = await fetch(`/api/casts/${castId}`)
+      if (!response.ok) {
+        throw new Error('キャストの取得に失敗しました')
+      }
+      
+      const castData = await response.json()
+      setCast(castData)
+      
+      // フォームデータを設定
+      setFormData({
+        name: castData.name,
+        snsLink: castData.snsLink,
+        storeLink: castData.storeLink || '',
+        area: castData.area,
+        serviceType: castData.serviceType,
+        budgetRange: castData.budgetRange
+      })
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'エラーが発生しました')
+      router.push('/admin')
+    } finally {
+      setInitialLoading(false)
+    }
+  }
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
@@ -91,8 +129,8 @@ export default function AddCastPage() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/casts', {
-        method: 'POST',
+      const response = await fetch(`/api/casts/${castId}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -108,7 +146,7 @@ export default function AddCastPage() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'キャストの追加に失敗しました')
+        throw new Error(errorData.error || 'キャストの更新に失敗しました')
       }
 
       // 成功時は管理者ページに戻る
@@ -128,12 +166,12 @@ export default function AddCastPage() {
     }
   }
 
-  if (areasLoading) {
+  if (initialLoading || areasLoading) {
     return (
       <div className="min-h-screen bg-dark-gradient flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-glow-primary mx-auto mb-4"></div>
-          <p className="text-gray-300 text-lg">エリア情報を読み込み中...</p>
+          <p className="text-gray-300 text-lg">読み込み中...</p>
         </div>
       </div>
     )
@@ -154,14 +192,29 @@ export default function AddCastPage() {
     )
   }
 
+  if (!cast) {
+    return (
+      <div className="min-h-screen bg-dark-gradient flex items-center justify-center p-4">
+        <div className="text-center max-w-md">
+          <div className="text-6xl mb-6">😔</div>
+          <h2 className="text-2xl font-bold text-white mb-4">キャストが見つかりません</h2>
+          <p className="text-gray-300 mb-6">指定されたキャストは存在しないか、削除されている可能性があります。</p>
+          <Button onClick={() => router.push('/admin')} variant="primary">
+            管理者ページに戻る
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-dark-gradient">
       <div className="container mx-auto px-4 py-8">
         {/* ヘッダー */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold glow-text mb-2">新しいキャストを追加</h1>
-            <p className="text-gray-300">キャスト情報を入力してください</p>
+            <h1 className="text-4xl font-bold glow-text mb-2">キャスト情報を編集</h1>
+            <p className="text-gray-300">{cast.name} の情報を更新</p>
           </div>
           <Button 
             onClick={() => router.push('/admin')}
@@ -323,7 +376,7 @@ export default function AddCastPage() {
                   glow={!loading}
                   className="flex-1"
                 >
-                  {loading ? '追加中...' : 'キャストを追加'}
+                  {loading ? '更新中...' : 'キャスト情報を更新'}
                 </Button>
                 <Button
                   type="button"
