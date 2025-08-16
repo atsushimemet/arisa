@@ -30,9 +30,18 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Install only production dependencies for the runner stage
+# Copy package files first
 COPY package.json package-lock.json* ./
+
+# Copy Prisma files before installing dependencies
+COPY --from=builder /app/prisma ./prisma
+
+# Install only production dependencies for the runner stage
 RUN npm ci --only=production && npm cache clean --force
+
+# Copy generated Prisma client from builder stage
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 COPY --from=builder /app/public ./public
 
@@ -44,8 +53,7 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy Prisma files and migration script
-COPY --from=builder /app/prisma ./prisma
+# Copy migration script
 COPY --from=builder /app/scripts ./scripts
 RUN chmod +x scripts/migrate-and-seed.sh
 
