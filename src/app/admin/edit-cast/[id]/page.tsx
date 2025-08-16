@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -44,13 +44,7 @@ export default function EditCastPage() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [cast, setCast] = useState<Cast | null>(null)
 
-  useEffect(() => {
-    if (castId) {
-      fetchCast()
-    }
-  }, [castId])
-
-  const fetchCast = async () => {
+  const fetchCast = useCallback(async () => {
     try {
       const response = await fetch(`/api/casts/${castId}`)
       if (!response.ok) {
@@ -75,7 +69,13 @@ export default function EditCastPage() {
     } finally {
       setInitialLoading(false)
     }
-  }
+  }, [castId, router])
+
+  useEffect(() => {
+    if (castId) {
+      fetchCast()
+    }
+  }, [castId, fetchCast])
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
