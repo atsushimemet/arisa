@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 # Copy Prisma schema for postinstall script
 COPY prisma ./prisma
-RUN npm ci
+RUN npm ci --verbose
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -17,8 +17,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Prisma Client
-RUN npx prisma generate
+# Ensure Prisma dependencies are available and generate client
+RUN npx prisma --version
+RUN npx prisma generate --schema=./prisma/schema.prisma
 
 # Build the application
 RUN npm run build
