@@ -1,16 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env sh
+set -eu
+
 echo "Running database migrations..."
 npx prisma migrate deploy
 
 echo "Checking if seeding is needed..."
-# Check if the casts table has any data
-CAST_COUNT=$(npx prisma db execute --stdin <<< "SELECT COUNT(*) FROM casts;" 2>/dev/null || echo "0")
-
-if [ "$CAST_COUNT" = "0" ] || [ -z "$CAST_COUNT" ]; then
-  echo "Seeding database..."
-  npx prisma db seed
+SEED="${SEED:-}"
+if [ "$SEED" = "true" ]; then
+  if [ -f "prisma/seed.ts" ]; then
+    node --loader ts-node/esm prisma/seed.ts
+  elif [ -f "prisma/seed.js" ]; then
+    node prisma/seed.js
+  else
+    echo "No seed file found, skipping."
+  fi
 else
-  echo "Database already has data, skipping seed."
+  echo "SEED is not 'true', skipping."
 fi
-
-echo "Database setup complete."
