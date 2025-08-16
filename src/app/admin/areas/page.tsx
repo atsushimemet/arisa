@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { AreaMaster } from '@/types'
+import { mobileLog } from '@/components/MobileConsole'
 
 interface FormData {
   key: string
@@ -41,12 +42,21 @@ export default function AreasManagementPage() {
     try {
       const response = await fetch('/api/areas')
       if (!response.ok) {
-        throw new Error('エリアの取得に失敗しました')
+        const errorData = await response.json().catch(() => ({ error: 'レスポンスの解析に失敗しました' }))
+        const errorMessage = errorData.error || `HTTPエラー: ${response.status} ${response.statusText}`
+        throw new Error(errorMessage)
       }
       const data = await response.json()
       setAreas(data)
+      mobileLog.info(`エリア一覧を取得しました (${data.length}件)`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'エラーが発生しました')
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+      setError(errorMessage)
+      mobileLog.error(`エリア取得エラー: ${errorMessage}`, {
+        url: '/api/areas',
+        error: err,
+        timestamp: new Date().toISOString()
+      })
     } finally {
       setLoading(false)
     }
@@ -95,15 +105,24 @@ export default function AreasManagementPage() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `エリアの${editingArea ? '更新' : '追加'}に失敗しました`)
+        const errorData = await response.json().catch(() => ({ error: 'レスポンスの解析に失敗しました' }))
+        const errorMessage = errorData.error || `エリアの${editingArea ? '更新' : '追加'}に失敗しました`
+        throw new Error(errorMessage)
       }
 
       // 成功時はフォームをリセットしてエリア一覧を再取得
+      mobileLog.info(`エリア${editingArea ? '更新' : '追加'}が成功しました: ${formData.label}`)
       resetForm()
       fetchAreas()
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'エラーが発生しました')
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+      mobileLog.error(`エリア${editingArea ? '更新' : '追加'}エラー: ${errorMessage}`, {
+        formData,
+        editingArea,
+        error: err,
+        timestamp: new Date().toISOString()
+      })
+      alert(errorMessage)
     } finally {
       setSubmitting(false)
     }
@@ -120,13 +139,21 @@ export default function AreasManagementPage() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'エリアの削除に失敗しました')
+        const errorData = await response.json().catch(() => ({ error: 'レスポンスの解析に失敗しました' }))
+        const errorMessage = errorData.error || 'エリアの削除に失敗しました'
+        throw new Error(errorMessage)
       }
 
+      mobileLog.info(`エリアを削除しました: ${areaId}`)
       fetchAreas()
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'エラーが発生しました')
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+      mobileLog.error(`エリア削除エラー: ${errorMessage}`, {
+        areaId,
+        error: err,
+        timestamp: new Date().toISOString()
+      })
+      alert(errorMessage)
     }
   }
 
@@ -163,12 +190,22 @@ export default function AreasManagementPage() {
       })
 
       if (!response.ok) {
-        throw new Error('ステータスの更新に失敗しました')
+        const errorData = await response.json().catch(() => ({ error: 'レスポンスの解析に失敗しました' }))
+        const errorMessage = errorData.error || 'ステータスの更新に失敗しました'
+        throw new Error(errorMessage)
       }
 
+      mobileLog.info(`エリアステータスを更新しました: ${areaId} -> ${!isActive ? 'アクティブ' : '非アクティブ'}`)
       fetchAreas()
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'エラーが発生しました')
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+      mobileLog.error(`エリアステータス更新エラー: ${errorMessage}`, {
+        areaId,
+        isActive,
+        error: err,
+        timestamp: new Date().toISOString()
+      })
+      alert(errorMessage)
     }
   }
 
