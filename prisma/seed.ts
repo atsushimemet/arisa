@@ -21,6 +21,30 @@ async function main() {
 
   console.log('管理者アカウントを作成しました:', admin.email)
 
+  // エリアマスターデータを作成
+  const sampleAreas = [
+    { key: 'SHIBUYA', label: '渋谷', sortOrder: 0 },
+    { key: 'SHINJUKU', label: '新宿', sortOrder: 1 },
+    { key: 'GINZA', label: '銀座', sortOrder: 2 },
+    { key: 'ROPPONGI', label: '六本木', sortOrder: 3 },
+    { key: 'IKEBUKURO', label: '池袋', sortOrder: 4 },
+    { key: 'AKASAKA', label: '赤坂', sortOrder: 5 },
+    { key: 'KABUKICHO', label: '歌舞伎町', sortOrder: 6 },
+    { key: 'OTHER', label: 'その他', sortOrder: 7 }
+  ]
+
+  for (const areaData of sampleAreas) {
+    const area = await prisma.areaMaster.upsert({
+      where: { key: areaData.key },
+      update: {},
+      create: {
+        ...areaData,
+        isActive: true
+      }
+    })
+    console.log('エリアを作成しました:', area.label)
+  }
+
   // サンプルキャストデータを作成
   const sampleCasts = [
     {
