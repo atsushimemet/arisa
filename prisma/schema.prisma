@@ -13,7 +13,7 @@ datasource db {
 model Cast {
   id          String   @id @default(cuid())
   name        String
-  snsLink     String
+  snsLink     String   @unique
   storeLink   String?
   area        Area
   serviceType ServiceType
