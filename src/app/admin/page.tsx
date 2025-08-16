@@ -183,7 +183,7 @@ export default function AdminPage() {
                   </div>
 
                   <div className="space-y-2 mb-4">
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-2">
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
                         📍 {AREA_LABELS[cast.area]}
                       </span>
@@ -194,16 +194,13 @@ export default function AdminPage() {
                         💰 {BUDGET_RANGE_LABELS[cast.budgetRange]}
                       </span>
                     </div>
-                  </div>
-
-                  <div className="space-y-2 mb-4">
                     <a
                       href={cast.snsLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block text-glow-primary hover:text-glow-secondary text-sm truncate"
                     >
-                      SNS: {cast.snsLink}
+                      顔付きSNS: {cast.snsLink}
                     </a>
                     {cast.storeLink && (
                       <a
@@ -212,7 +209,7 @@ export default function AdminPage() {
                         rel="noopener noreferrer"
                         className="block text-glow-secondary hover:text-glow-primary text-sm truncate"
                       >
-                        店舗: {cast.storeLink}
+                        所属店舗: {cast.storeLink}
                       </a>
                     )}
                   </div>

@@ -52,15 +52,25 @@ export default function Home() {
             </p>
           </div>
 
-          <Button 
-            onClick={handleStartOnboarding}
-            variant="primary"
-            size="lg"
-            glow
-            className="text-xl px-12 py-4"
-          >
-            キャストを探す
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <Button 
+              onClick={handleStartOnboarding}
+              variant="primary"
+              size="lg"
+              glow
+              className="text-xl px-12 py-4"
+            >
+              キャストを探す
+            </Button>
+            <Button 
+              onClick={() => router.push('/admin')}
+              variant="outline"
+              size="lg"
+              className="text-lg px-8 py-3"
+            >
+              管理者ページ
+            </Button>
+          </div>
         </div>
 
         {/* 特徴セクション */}
