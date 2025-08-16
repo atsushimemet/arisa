@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Area, ServiceType, BudgetRange } from '@/types'
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,7 +11,7 @@ export async function GET(request: NextRequest) {
     const budgetRange = searchParams.get('budgetRange') as BudgetRange | null
 
     // フィルター条件を構築
-    const where: any = {
+    const where: Prisma.CastWhereInput = {
       isActive: true
     }
 
