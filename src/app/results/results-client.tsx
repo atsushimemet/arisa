@@ -298,7 +298,9 @@ export function ResultsClient() {
               className="rounded-full p-4 shadow-gaming"
               glow
               icon={<ArrowLeft className="w-6 h-6" />}
-            />
+            >
+              ホームに戻る
+            </Button>
           </div>
         </div>
       </div>
