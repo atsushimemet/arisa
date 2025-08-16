@@ -258,7 +258,6 @@ export default function AreasManagementPage() {
                 setFormErrors({})
               }}
               variant="primary"
-              glow
             >
               新しいエリアを追加
             </Button>
@@ -348,7 +347,6 @@ export default function AreasManagementPage() {
                     type="submit"
                     variant="primary"
                     disabled={submitting}
-                    glow={!submitting}
                   >
                     {submitting ? `${editingArea ? '更新' : '追加'}中...` : `${editingArea ? '更新' : '追加'}`}
                   </Button>

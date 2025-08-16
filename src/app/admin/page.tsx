@@ -116,7 +116,6 @@ export default function AdminPage() {
             <Button 
               onClick={() => router.push('/admin/add-cast')}
               variant="primary"
-              glow
             >
               新しいキャストを追加
             </Button>

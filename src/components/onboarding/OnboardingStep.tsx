@@ -127,7 +127,6 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 onClick={onBack}
                 icon={<ChevronLeft className="w-5 h-5" />}
                 className="px-8 py-3"
-                ripple
               >
                 {backLabel}
               </Button>
@@ -140,11 +139,9 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 variant={canProceed ? "primary" : "secondary"}
                 onClick={onNext}
                 disabled={!canProceed}
-                glow={canProceed}
                 size="lg"
                 icon={<ChevronRight className="w-5 h-5" />}
                 className="px-12 py-4 group"
-                ripple
               >
                 <span className="mr-2">{nextLabel}</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

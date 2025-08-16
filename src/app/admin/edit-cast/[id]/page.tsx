@@ -384,7 +384,6 @@ export default function EditCastPage() {
                   variant="primary"
                   size="lg"
                   disabled={loading}
-                  glow={!loading}
                   className="flex-1"
                 >
                   {loading ? '更新中...' : 'キャスト情報を更新'}

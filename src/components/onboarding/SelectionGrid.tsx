@@ -68,12 +68,10 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
             }`}
           >
             <Card
-              variant={isSelected ? "gaming" : "cyber"}
+              variant={isSelected ? "elevated" : "default"}
               selected={isSelected}
               onClick={() => handleSelect(option.value)}
               className="text-center p-8 cursor-pointer group relative min-h-[180px] flex flex-col justify-center"
-              glow={isSelected}
-              borderGlow={isSelected ? "green" : "cyan"}
               hoverable
               animated
             >
