@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Cast, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
-import { MobileConsole, MobileConsoleToggle } from '@/components/MobileConsole'
+import { MobileConsole } from '@/components/MobileConsole'
 
 export default function AdminPage() {
   const router = useRouter()

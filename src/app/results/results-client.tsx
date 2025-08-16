@@ -208,7 +208,7 @@ export function ResultsClient() {
           {/* Results Grid */}
           {casts.length > 0 ? (
             <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
-              {casts.map((cast, index) => (
+              {casts.map((cast) => (
                 <Card
                   key={cast.id}
                   variant="gaming"
@@ -236,38 +236,20 @@ export function ResultsClient() {
                       </span>
                     </div>
                     
-                    {/* Description */}
-                    {cast.description && (
-                      <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                        {cast.description}
-                      </p>
-                    )}
                   </div>
 
                   {/* Social links */}
                   <div className="space-y-3">
-                    {cast.twitterUrl && (
+                    {cast.snsLink && (
                       <Button
-                        onClick={() => window.open(cast.twitterUrl, '_blank')}
+                        onClick={() => window.open(cast.snsLink, '_blank')}
                         variant="neon"
                         size="sm"
                         className="w-full"
                         icon={<ExternalLink className="w-4 h-4" />}
                         ripple
                       >
-                        Twitter で確認
-                      </Button>
-                    )}
-                    {cast.instagramUrl && (
-                      <Button
-                        onClick={() => window.open(cast.instagramUrl, '_blank')}
-                        variant="cyber"
-                        size="sm"
-                        className="w-full"
-                        icon={<ExternalLink className="w-4 h-4" />}
-                        ripple
-                      >
-                        Instagram で確認
+                        SNS で確認
                       </Button>
                     )}
                   </div>
