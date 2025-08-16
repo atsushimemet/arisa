@@ -9,7 +9,7 @@ export interface LogEntry {
   level: 'error' | 'warn' | 'info' | 'debug'
   message: string
   stack?: string
-  data?: any
+  data?: unknown
 }
 
 interface MobileConsoleProps {
@@ -77,7 +77,7 @@ class LogCollector {
     })
   }
 
-  addLog(level: LogEntry['level'], message: string, stack?: string, data?: any) {
+  addLog(level: LogEntry['level'], message: string, stack?: string, data?: unknown) {
     const newLog: LogEntry = {
       id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
       timestamp: new Date(),
@@ -120,10 +120,10 @@ class LogCollector {
 
 // カスタムログ関数をエクスポート
 export const mobileLog = {
-  error: (message: string, data?: any) => LogCollector.getInstance().addLog('error', message, undefined, data),
-  warn: (message: string, data?: any) => LogCollector.getInstance().addLog('warn', message, undefined, data),
-  info: (message: string, data?: any) => LogCollector.getInstance().addLog('info', message, undefined, data),
-  debug: (message: string, data?: any) => LogCollector.getInstance().addLog('debug', message, undefined, data),
+  error: (message: string, data?: unknown) => LogCollector.getInstance().addLog('error', message, undefined, data),
+  warn: (message: string, data?: unknown) => LogCollector.getInstance().addLog('warn', message, undefined, data),
+  info: (message: string, data?: unknown) => LogCollector.getInstance().addLog('info', message, undefined, data),
+  debug: (message: string, data?: unknown) => LogCollector.getInstance().addLog('debug', message, undefined, data),
 }
 
 export function MobileConsole({ isOpen, onToggle }: MobileConsoleProps) {
@@ -145,7 +145,7 @@ export function MobileConsole({ isOpen, onToggle }: MobileConsoleProps) {
       await navigator.clipboard.writeText(text)
       // 一時的な成功表示（簡易版）
       alert('コピーしました')
-    } catch (err) {
+    } catch {
       // フォールバック: テキストエリアを使用
       const textArea = document.createElement('textarea')
       textArea.value = text
@@ -298,7 +298,7 @@ export function MobileConsole({ isOpen, onToggle }: MobileConsoleProps) {
                               {log.stack}
                             </div>
                           )}
-                          {log.data && (
+                          {log.data !== undefined && (
                             <div className="text-gray-400 text-xs mt-2 font-mono bg-gray-900 p-2 rounded overflow-x-auto">
                               {JSON.stringify(log.data, null, 2)}
                             </div>
