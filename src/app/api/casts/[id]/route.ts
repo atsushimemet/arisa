@@ -3,10 +3,10 @@ import { prisma } from '@/lib/prisma'
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params
+    const { id } = await params
     const body = await request.json()
 
     // キャストが存在するかチェック
@@ -38,11 +38,10 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: Record<string, string | string[]> }
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const raw = params.id;
-  const id = Array.isArray(raw) ? raw[0] : raw;
+  const { id } = await params
 
   if (!id) {
     return NextResponse.json({ error: 'Missing id' }, { status: 400 });
