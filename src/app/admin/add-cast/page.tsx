@@ -169,8 +169,11 @@ export default function AddCastPage() {
               {/* SNSリンク */}
               <div>
                 <label className="block text-white font-medium mb-2">
-                  SNSリンク <span className="text-red-400">*</span>
+                  顔付きSNS URL <span className="text-red-400">*</span>
                 </label>
+                <p className="text-gray-400 text-sm mb-2">
+                  キャストの顔がわかるSNSリンクを入力してください
+                </p>
                 <input
                   type="url"
                   value={formData.snsLink}
@@ -178,7 +181,7 @@ export default function AddCastPage() {
                   className={`w-full px-4 py-3 bg-dark-accent border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-glow-primary ${
                     errors.snsLink ? 'border-red-400' : 'border-gray-600'
                   }`}
-                  placeholder="https://twitter.com/username"
+                  placeholder="https://twitter.com/username または https://instagram.com/username"
                 />
                 {errors.snsLink && (
                   <p className="text-red-400 text-sm mt-1">{errors.snsLink}</p>
@@ -188,8 +191,11 @@ export default function AddCastPage() {
               {/* 店舗リンク */}
               <div>
                 <label className="block text-white font-medium mb-2">
-                  店舗リンク（任意）
+                  所属店舗URL（任意）
                 </label>
+                <p className="text-gray-400 text-sm mb-2">
+                  店舗のホームページURLを入力してください
+                </p>
                 <input
                   type="url"
                   value={formData.storeLink}
@@ -255,8 +261,11 @@ export default function AddCastPage() {
               {/* 予算帯 */}
               <div>
                 <label className="block text-white font-medium mb-2">
-                  予算帯 <span className="text-red-400">*</span>
+                  予算 <span className="text-red-400">*</span>
                 </label>
+                <p className="text-gray-400 text-sm mb-2">
+                  オンボーディングで表示される予算帯から選択してください
+                </p>
                 <select
                   value={formData.budgetRange}
                   onChange={(e) => handleInputChange('budgetRange', e.target.value)}
