@@ -42,10 +42,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-primary/30 to-dark-primary/70" />
       
-      <div className="relative z-10 flex flex-col items-center justify-center p-4 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-center px-6 lg:px-8 py-8 lg:py-12 min-h-screen">
         <div className="w-full max-w-3xl mx-auto">
           {/* Enhanced Progress Bar */}
-          <div className={`mb-12 transition-all duration-1000 ${isAnimated ? 'animate-slide-in-down' : 'opacity-0'}`}>
+          <div className={`mb-16 lg:mb-20 transition-all duration-1000 ${isAnimated ? 'animate-slide-in-down' : 'opacity-0'}`}>
             {/* Step indicators */}
             <div className="flex justify-between items-center mb-6">
               {Array.from({ length: totalSteps }, (_, index) => (
@@ -103,8 +103,8 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
           </div>
 
           {/* Header */}
-          <div className={`text-center mb-16 transition-all duration-1000 delay-300 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
-            <h1 className="text-5xl font-bold mb-6 holographic-text animate-holographic">
+          <div className={`text-center mb-20 lg:mb-24 transition-all duration-1000 delay-300 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
+            <h1 className="text-5xl font-bold mb-8 holographic-text animate-holographic">
               {title}
             </h1>
             {subtitle && (
@@ -115,7 +115,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
           </div>
 
           {/* Content */}
-          <div className={`mb-16 transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
+          <div className={`mb-20 lg:mb-24 transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
             {children}
           </div>
 

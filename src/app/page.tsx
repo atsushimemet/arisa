@@ -58,14 +58,14 @@ export default function Home() {
       
       {/* Hero Section */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 py-20">
-          <div className={`text-center mb-20 transition-all duration-1000 ${isLoaded ? 'animate-slide-in-down' : 'opacity-0'}`}>
+        <div className="container mx-auto px-6 lg:px-8 py-24 lg:py-32">
+          <div className={`text-center mb-24 lg:mb-32 transition-all duration-1000 ${isLoaded ? 'animate-slide-in-down' : 'opacity-0'}`}>
             {/* Main title with holographic effect */}
-            <div className="mb-8">
-              <h1 className="text-8xl font-bold mb-6 holographic-text animate-holographic">
+            <div className="mb-12">
+              <h1 className="text-8xl font-bold mb-8 holographic-text animate-holographic">
                 Arisa
               </h1>
-              <div className="text-3xl text-gray-300 mb-8 animate-fade-in delay-300">
+              <div className="text-3xl text-gray-300 mb-12 animate-fade-in delay-300">
                 あなたにぴったりの
                 <span className="glow-text-cyan ml-2">キャスト</span>
                 を見つけよう
@@ -74,9 +74,9 @@ export default function Home() {
             </div>
             
             {/* Enhanced description */}
-            <div className={`max-w-3xl mx-auto mb-16 transition-all duration-1000 delay-200 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
-              <Card variant="glass" className="p-8 backdrop-blur-xl">
-                <p className="text-lg text-gray-300 leading-relaxed">
+            <div className={`max-w-3xl mx-auto mb-20 transition-all duration-1000 delay-200 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
+              <Card variant="glass" className="p-10 lg:p-12 backdrop-blur-xl">
+                <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
                   エリア・接客スタイル・予算に応じた「顔出し投稿キャスト」への導線をシンプルに提示。
                   <br />
                   <span className="glow-text-green">SNS更新を継続するキャスト</span>が報われる仕組みで、
@@ -86,7 +86,7 @@ export default function Home() {
             </div>
 
             {/* CTA Buttons */}
-            <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 transition-all duration-1000 delay-400 ${isLoaded ? 'animate-scale-in' : 'opacity-0'}`}>
+            <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center mb-16 transition-all duration-1000 delay-400 ${isLoaded ? 'animate-scale-in' : 'opacity-0'}`}>
               <Button 
                 onClick={handleStartOnboarding}
                 variant="primary"
@@ -111,13 +111,13 @@ export default function Home() {
             </div>
 
             {/* Stats section */}
-            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 transition-all duration-1000 delay-600 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 transition-all duration-1000 delay-600 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
               {stats.map((stat, index) => (
-                <Card key={index} variant="glass" className="text-center p-6" glow borderGlow="cyan">
-                  <div className="flex items-center justify-center mb-2 text-neon-cyan">
+                <Card key={index} variant="glass" className="text-center p-8 lg:p-10" glow borderGlow="cyan">
+                  <div className="flex items-center justify-center mb-4 text-neon-cyan">
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bold text-white mb-1 glow-text-cyan">{stat.number}</div>
+                  <div className="text-3xl font-bold text-white mb-2 glow-text-cyan">{stat.number}</div>
                   <div className="text-gray-400">{stat.label}</div>
                 </Card>
               ))}
@@ -125,29 +125,29 @@ export default function Home() {
           </div>
 
           {/* Features Section */}
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 transition-all duration-1000 delay-800 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 mb-28 lg:mb-36 transition-all duration-1000 delay-800 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
             {features.map((feature, index) => (
               <Card 
                 key={index} 
                 variant={feature.variant}
-                className="text-center p-8 hover:scale-105 transform transition-all duration-300"
+                className="text-center p-10 lg:p-12 hover:scale-105 transform transition-all duration-300"
                 glow
                 borderGlow={feature.borderGlow}
                 animated
               >
-                <div className="text-5xl mb-6 flex justify-center text-glow-primary">
+                <div className="text-5xl mb-8 flex justify-center text-glow-primary">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 glow-text">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-6 glow-text">{feature.title}</h3>
                 <p className="text-gray-300 leading-relaxed">{feature.description}</p>
               </Card>
             ))}
           </div>
 
           {/* Process Steps Section */}
-          <div className={`text-center mb-20 transition-all duration-1000 delay-1000 ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
-            <h2 className="text-4xl font-bold mb-16 glow-text-purple">使い方</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className={`text-center mb-28 lg:mb-36 transition-all duration-1000 delay-1000 ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
+            <h2 className="text-4xl font-bold mb-20 glow-text-purple">使い方</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-12">
               {[
                 { step: '1', title: 'エリア選択', description: 'お好みのエリアを選択', color: 'from-glow-primary to-glow-secondary' },
                 { step: '2', title: '接客スタイル', description: '雰囲気を選択', color: 'from-neon-cyan to-neon-purple' },
@@ -155,17 +155,17 @@ export default function Home() {
                 { step: '4', title: 'キャスト発見', description: 'SNSで確認・来店', color: 'from-game-gold to-neon-pink' }
               ].map((item, index) => (
                 <div key={index} className="relative group">
-                  <Card variant="gaming" className="p-6" glow borderGlow="green">
-                    <div className={`bg-gradient-to-r ${item.color} text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-neon animate-bounce-glow`}>
+                  <Card variant="gaming" className="p-8 lg:p-10" glow borderGlow="green">
+                    <div className={`bg-gradient-to-r ${item.color} text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-8 shadow-neon animate-bounce-glow`}>
                       {item.step}
                     </div>
-                    <h4 className="text-lg font-semibold text-white mb-3 glow-text-green">{item.title}</h4>
+                    <h4 className="text-lg font-semibold text-white mb-4 glow-text-green">{item.title}</h4>
                     <p className="text-gray-300 text-sm leading-relaxed">{item.description}</p>
                   </Card>
                   
                   {/* Connection arrow */}
                   {index < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-20">
+                    <div className="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
                       <ArrowRight className="w-8 h-8 text-glow-primary animate-pulse opacity-70" />
                     </div>
                   )}
@@ -176,11 +176,11 @@ export default function Home() {
 
           {/* Final CTA Section */}
           <div className={`text-center transition-all duration-1000 delay-1200 ${isLoaded ? 'animate-slide-in-up' : 'opacity-0'}`}>
-            <Card variant="cyber" className="p-12 max-w-4xl mx-auto" glow borderGlow="cyan">
-              <h2 className="text-4xl font-bold mb-6 glow-text-cyan">
+            <Card variant="cyber" className="p-12 lg:p-16 max-w-4xl mx-auto" glow borderGlow="cyan">
+              <h2 className="text-4xl font-bold mb-8 glow-text-cyan">
                 今すぐ始めましょう
               </h2>
-              <p className="text-gray-300 mb-8 text-lg leading-relaxed max-w-2xl mx-auto">
+              <p className="text-gray-300 mb-10 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
                 簡単な質問に答えるだけで、あなたにぴったりのキャストが見つかります。
                 <br />
                 <span className="glow-text-green">完全無料</span>で利用できます。
@@ -202,10 +202,10 @@ export default function Home() {
       </div>
 
       {/* Enhanced Footer */}
-      <footer className="relative z-10 bg-dark-primary/90 border-t border-gray-800 py-12 mt-20 backdrop-blur-md">
-        <div className="container mx-auto px-4 text-center">
-          <div className="glow-text-purple font-bold text-3xl mb-6 holographic-text">Arisa</div>
-          <p className="text-gray-400 text-sm mb-4">
+      <footer className="relative z-10 bg-dark-primary/90 border-t border-gray-800 py-16 mt-28 lg:mt-36 backdrop-blur-md">
+        <div className="container mx-auto px-6 lg:px-8 text-center">
+          <div className="glow-text-purple font-bold text-3xl mb-8 holographic-text">Arisa</div>
+          <p className="text-gray-400 text-sm mb-6">
             © 2024 Arisa. All rights reserved.
           </p>
           <div className="flex justify-center space-x-4">

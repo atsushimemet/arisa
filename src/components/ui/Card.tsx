@@ -27,7 +27,7 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false)
 
-  const baseClasses = 'rounded-xl p-6 transition-all duration-300 relative overflow-hidden group'
+  const baseClasses = 'rounded-xl p-8 lg:p-10 transition-all duration-300 relative overflow-hidden group'
   
   const variantClasses = {
     default: 'bg-dark-card border border-dark-border backdrop-blur-md',
