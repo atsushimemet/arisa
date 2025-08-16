@@ -19,54 +19,240 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-/* カスタムスクロールバー */
+/* Enhanced scrollbar with gaming aesthetics */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #0a0a0a;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff6b9d;
-  border-radius: 4px;
+  background: linear-gradient(45deg, #ff6b9d, #00d4ff);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c44569;
+  background: linear-gradient(45deg, #ff0080, #00ffff);
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
 }
 
-/* グロー効果のユーティリティクラス */
+/* Enhanced glow effects */
 .glow-text {
-  text-shadow: 0 0 10px rgba(255, 107, 157, 0.8);
+  text-shadow: 0 0 10px rgba(255, 107, 157, 0.8), 0 0 20px rgba(255, 107, 157, 0.6);
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.glow-text-cyan {
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.glow-text-purple {
+  color: #8b5cf6;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.glow-text-green {
+  color: #39ff14;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.8), 0 0 20px rgba(57, 255, 20, 0.6);
 }
 
 .glow-border {
   border: 1px solid rgba(255, 107, 157, 0.5);
-  box-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.3), inset 0 0 10px rgba(255, 107, 157, 0.1);
+}
+
+.glow-border-cyan {
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
 .glow-bg {
   background: linear-gradient(45deg, rgba(255, 107, 157, 0.1), rgba(196, 69, 105, 0.1));
+  backdrop-filter: blur(10px);
 }
 
-/* ホバー時のグロー効果 */
+.gaming-glass {
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced hover effects */
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
-  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 107, 157, 0.6), 0 0 40px rgba(255, 107, 157, 0.4);
+  transform: translateY(-3px) scale(1.02);
   transition: all 0.3s ease;
+}
+
+.hover-float:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Gaming-style button ripple effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple-effect:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Holographic text effect */
+.holographic-text {
+  background: linear-gradient(45deg, #ff0080, #00ffff, #8b5cf6, #39ff14, #ff6600);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographic 4s linear infinite;
+}
+
+/* Cyberpunk card styles */
+.cyber-card {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+  border: 1px solid rgba(255, 107, 157, 0.3);
+  box-shadow: 
+    0 0 20px rgba(255, 107, 157, 0.2),
+    inset 0 0 20px rgba(255, 107, 157, 0.05);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.cyber-card:hover::before {
+  left: 100%;
+}
+
+/* Loading animations */
+.loading-dots::after {
+  content: '';
+  display: inline-block;
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Particle background effect */
+.particle-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 107, 157, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(0, 212, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(57, 255, 20, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  animation: particle-float 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-150px); }
+}
+
+/* Interactive elements */
+.interactive-glow {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.interactive-glow:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+.interactive-glow:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Selection highlight */
+::selection {
+  background: rgba(255, 107, 157, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(255, 107, 157, 0.3);
+  color: white;
+}
+
+/* Focus styles */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.3);
 }
