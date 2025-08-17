@@ -199,6 +199,10 @@ Renderサービスの**Environment**タブで以下の環境変数を設定：
 
 ### 必須環境変数
 
+> **注意**: render.yamlファイルが追加されているため、手動での環境変数設定は不要です。render.yamlが自動的にPostgreSQLデータベースと必要な環境変数を設定します。
+
+手動設定する場合の参考値：
+
 ```env
 # データベース（Session Pooler接続を推奨）
 DATABASE_URL=postgresql://postgres:[PASSWORD]@[POOLER-HOST]:[POOLER-PORT]/postgres?pgbouncer=true

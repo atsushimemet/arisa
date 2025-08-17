@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: arisa
+    env: docker
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: arisa-db
+          property: connectionString
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://arisa.onrender.com
+      - key: SEED
+        value: "true"
+
+databases:
+  - name: arisa-db
+    databaseName: arisa
+    user: arisa_user
+    region: singapore

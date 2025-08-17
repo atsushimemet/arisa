@@ -101,13 +101,18 @@ npm install
 `.env.local`ファイルを作成し、以下の内容を設定してください：
 
 ```env
-# Database
+# Database - ローカル開発用（Docker Compose使用時）
 DATABASE_URL="postgresql://arisa_user:arisa_password@localhost:5432/arisa"
+
+# Database - ローカル開発用（SQLite使用時）- 本番用Renderデプロイでは自動設定
+# DATABASE_URL="file:./dev.db"
 
 # NextAuth
 NEXTAUTH_SECRET="your-secret-key-here-change-in-production"
 NEXTAUTH_URL="http://localhost:3000"
 ```
+
+> **注意**: RenderでのデプロイではPostgreSQLが自動的に設定されます。ローカル開発では上記のPostgreSQL設定またはSQLite設定のいずれかを使用できます。
 
 ### 3. データベースの起動
 
