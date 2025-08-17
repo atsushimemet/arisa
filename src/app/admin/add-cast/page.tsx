@@ -160,24 +160,27 @@ export default function AddCastPage() {
     <div className="min-h-screen bg-dark-gradient">
       <div className="container mx-auto px-4 py-8">
         {/* ヘッダー */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
           <div>
-            <h1 className="text-4xl font-bold glow-text mb-2">新しいキャストを追加</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold glow-text mb-2">新しいキャストを追加</h1>
             <p className="text-gray-300">キャスト情報を入力してください</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-2 sm:gap-4">
             <Button 
               onClick={() => setIsDebugConsoleOpen(!isDebugConsoleOpen)}
               variant="outline"
-              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black"
+              className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black px-3 py-2 sm:px-4 text-lg"
+              title="デバッグコンソール"
             >
-              🐛 デバッグコンソール
+              🐛
             </Button>
             <Button 
               onClick={() => router.push('/admin')}
               variant="outline"
+              className="px-3 py-2 sm:px-4 text-lg"
+              title="管理者ページに戻る"
             >
-              管理者ページに戻る
+              ⬅️
             </Button>
           </div>
         </div>
