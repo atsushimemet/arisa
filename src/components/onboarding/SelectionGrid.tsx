@@ -93,7 +93,7 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
                 </div>
               )}
               
-              {/* Title */}
+              {/* Title - Always visible */}
               <h3 className={`text-xl font-bold mb-3 transition-all duration-300 ${
                 isSelected 
                   ? 'text-white glow-text-green' 
@@ -102,12 +102,12 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
                 {option.label}
               </h3>
               
-              {/* Description */}
+              {/* Description - Always visible */}
               {option.description && (
                 <p className={`text-sm leading-relaxed transition-all duration-300 ${
                   isSelected 
                     ? 'text-gray-200' 
-                    : 'text-gray-400 group-hover:text-gray-300'
+                    : 'text-gray-300 group-hover:text-gray-200'
                 }`}>
                   {option.description}
                 </p>

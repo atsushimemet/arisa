@@ -35,14 +35,14 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   }, [currentStep])
 
   return (
-    <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
+    <div className="min-h-screen w-full bg-dark-gradient relative overflow-hidden">
       {/* Particle background */}
       <div className="absolute inset-0 particle-bg opacity-30" />
       
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-primary/30 to-dark-primary/70" />
       
-      <div className="relative z-10 flex flex-col items-center justify-center px-6 lg:px-8 py-8 lg:py-12 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 lg:py-12 min-h-screen w-full">
         <div className="w-full max-w-3xl mx-auto">
           {/* Enhanced Progress Bar */}
           <div className={`mb-16 lg:mb-20 transition-all duration-1000 ${isAnimated ? 'animate-slide-in-down' : 'opacity-0'}`}>
@@ -104,11 +104,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
           {/* Header */}
           <div className={`text-center mb-20 lg:mb-24 transition-all duration-1000 delay-300 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
-            <h1 className="text-5xl font-bold mb-8 holographic-text animate-holographic">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-8 holographic-text animate-holographic">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
                 {subtitle}
               </p>
             )}
@@ -120,13 +120,13 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
           </div>
 
           {/* Navigation Buttons */}
-          <div className={`flex justify-between items-center transition-all duration-1000 delay-700 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
+          <div className={`flex justify-between items-center px-4 transition-all duration-1000 delay-700 ${isAnimated ? 'animate-slide-in-up' : 'opacity-0'}`}>
             {onBack ? (
               <Button
                 variant="outline"
                 onClick={onBack}
                 icon={<ChevronLeft className="w-5 h-5" />}
-                className="px-8 py-3"
+                className="px-6 sm:px-8 py-3"
               >
                 {backLabel}
               </Button>
@@ -141,7 +141,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 disabled={!canProceed}
                 size="lg"
                 icon={<ChevronRight className="w-5 h-5" />}
-                className="px-12 py-4 group"
+                className="px-8 sm:px-12 py-4 group"
               >
                 <span className="mr-2">{nextLabel}</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
