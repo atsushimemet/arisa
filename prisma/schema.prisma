@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -48,7 +48,7 @@ model Admin {
   @@map("admins")
 }
 
-// SQLite doesn't support enums, so we use strings with validation in the app
+// PostgreSQL supports enums, but we keep them as strings for compatibility
 // enum Area {
 //   SHIBUYA
 //   SHINJUKU
