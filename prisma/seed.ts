@@ -51,49 +51,49 @@ async function main() {
       name: '美咲',
       snsLink: 'https://twitter.com/misaki_cast',
       storeLink: 'https://example-store1.com',
-      area: 'SHIBUYA',
-      serviceType: 'KYABA',
-      budgetRange: 'FROM_20K_TO_30K'
+      area: '渋谷',
+      serviceType: 'キャバクラ',
+      budgetRange: '20,000円〜30,000円'
     },
     {
       name: 'あやか',
       snsLink: 'https://instagram.com/ayaka_cast',
       storeLink: 'https://example-store2.com',
-      area: 'SHINJUKU',
-      serviceType: 'GIRLS_BAR',
-      budgetRange: 'FROM_10K_TO_20K'
+      area: '新宿',
+      serviceType: 'ガールズバー',
+      budgetRange: '10,000円〜20,000円'
     },
     {
       name: 'ゆい',
       snsLink: 'https://twitter.com/yui_cast',
       storeLink: null,
-      area: 'GINZA',
-      serviceType: 'LOUNGE',
-      budgetRange: 'FROM_30K_TO_50K'
+      area: '銀座',
+      serviceType: 'ラウンジ',
+      budgetRange: '30,000円〜50,000円'
     },
     {
       name: 'りな',
       snsLink: 'https://instagram.com/rina_cast',
       storeLink: 'https://example-store3.com',
-      area: 'ROPPONGI',
-      serviceType: 'CLUB',
-      budgetRange: 'OVER_50K'
+      area: '六本木',
+      serviceType: 'クラブ',
+      budgetRange: '50,000円以上'
     },
     {
       name: 'さくら',
       snsLink: 'https://twitter.com/sakura_cast',
       storeLink: 'https://example-store4.com',
-      area: 'IKEBUKURO',
-      serviceType: 'SNACK',
-      budgetRange: 'UNDER_10K'
+      area: '池袋',
+      serviceType: 'スナック',
+      budgetRange: '10,000円未満'
     },
     {
       name: 'まい',
       snsLink: 'https://instagram.com/mai_cast',
       storeLink: null,
-      area: 'AKASAKA',
-      serviceType: 'KYABA',
-      budgetRange: 'FROM_20K_TO_30K'
+      area: '赤坂',
+      serviceType: 'キャバクラ',
+      budgetRange: '20,000円〜30,000円'
     }
   ]
 
@@ -103,9 +103,6 @@ async function main() {
       update: {},
       create: {
         ...castData,
-        area: castData.area as any,
-        serviceType: castData.serviceType as any,
-        budgetRange: castData.budgetRange as any,
         isActive: true
       }
     })
