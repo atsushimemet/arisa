@@ -71,7 +71,11 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               variant={isSelected ? "elevated" : "default"}
               selected={isSelected}
               onClick={() => handleSelect(option.value)}
-              className="text-center p-8 cursor-pointer group relative min-h-[180px] flex flex-col justify-center"
+              className={`text-center p-8 cursor-pointer group relative min-h-[180px] flex flex-col justify-center ${
+                isSelected 
+                  ? 'bg-dark-accent border-2 border-glow-primary shadow-neon' 
+                  : 'bg-dark-accent border border-gray-600 hover:bg-dark-accent/80 hover:border-gray-500'
+              }`}
               hoverable
               animated
             >
@@ -94,10 +98,10 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               )}
               
               {/* Title - Always visible */}
-              <h3 className={`text-xl font-bold mb-3 transition-all duration-300 ${
+              <h3 className={`text-2xl font-extrabold mb-3 transition-all duration-300 ${
                 isSelected 
                   ? 'text-white glow-text-green' 
-                  : 'text-white group-hover:glow-text-cyan'
+                  : 'text-white glow-text-cyan group-hover:glow-text-green'
               }`}>
                 {option.label}
               </h3>
@@ -107,7 +111,7 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
                 <p className={`text-sm leading-relaxed transition-all duration-300 ${
                   isSelected 
                     ? 'text-gray-200' 
-                    : 'text-gray-300 group-hover:text-gray-200'
+                    : 'text-gray-200 group-hover:text-gray-100'
                 }`}>
                   {option.description}
                 </p>
