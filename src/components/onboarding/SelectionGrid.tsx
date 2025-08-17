@@ -79,13 +79,6 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               hoverable
               animated
             >
-              {/* Selection indicator */}
-              {isSelected && (
-                <div className="absolute top-4 right-4 bg-blue-500 rounded-full p-2">
-                  <Check className="w-4 h-4 text-white" />
-                </div>
-              )}
-              
               {/* Icon */}
               {option.icon && (
                 <div className={`text-6xl mb-6 transition-all duration-300 ${
