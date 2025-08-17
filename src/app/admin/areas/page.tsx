@@ -286,13 +286,13 @@ export default function AreasManagementPage() {
         {showAddForm && (
           <div className="mb-8">
             <Card>
-              <h3 className="text-xl font-bold text-white mb-4">
+              <h3 className="text-xl font-bold text-black mb-4">
                 {editingArea ? 'エリアを編集' : '新しいエリアを追加'}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       キー <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -311,7 +311,7 @@ export default function AreasManagementPage() {
                   </div>
 
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       ラベル <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -329,7 +329,7 @@ export default function AreasManagementPage() {
                   </div>
 
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       並び順
                     </label>
                     <input
@@ -376,7 +376,7 @@ export default function AreasManagementPage() {
           {areas.length === 0 ? (
             <Card className="text-center py-12">
               <div className="text-6xl mb-4">📍</div>
-              <h3 className="text-xl font-bold text-white mb-2">
+              <h3 className="text-xl font-bold text-black mb-2">
                 エリアが登録されていません
               </h3>
               <p className="text-gray-300 mb-6">
@@ -395,7 +395,7 @@ export default function AreasManagementPage() {
                 <Card key={area.id} className="relative">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-white">{area.label}</h3>
+                      <h3 className="text-xl font-bold text-black">{area.label}</h3>
                       <p className="text-gray-400 text-sm">{area.key}</p>
                     </div>
                     <div className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -410,7 +410,7 @@ export default function AreasManagementPage() {
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center gap-2">
                       <span className="text-gray-400 text-sm">並び順:</span>
-                      <span className="text-white text-sm">{area.sortOrder}</span>
+                      <span className="text-black text-sm">{area.sortOrder}</span>
                     </div>
                   </div>
 
