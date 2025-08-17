@@ -136,6 +136,21 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('キャスト作成エラー:', error)
     
+    // エラー情報を詳細にログ出力（コピー可能な形式で）
+    const errorInfo = {
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      ...(error && typeof error === 'object' && 'code' in error && {
+        prismaCode: error.code,
+        prismaMeta: 'meta' in error ? error.meta : undefined
+      })
+    }
+    
+    console.error('=== キャスト作成エラー詳細（コピー用） ===')
+    console.error(JSON.stringify(errorInfo, null, 2))
+    console.error('=== エラー詳細終了 ===')
+    
     // Prismaエラーの詳細を確認
     if (error && typeof error === 'object' && 'code' in error) {
       console.error('Prisma エラーコード:', error.code)
@@ -147,7 +162,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'キャストの作成に失敗しました',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: errorInfo.timestamp,
+        // 開発環境でのみ詳細情報を含める
+        ...(process.env.NODE_ENV === 'development' && {
+          debugInfo: errorInfo
+        })
       },
       { status: 500 }
     )
