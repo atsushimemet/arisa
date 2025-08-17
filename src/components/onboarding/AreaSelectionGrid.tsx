@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Card } from '../ui/Card'
-import { Check, Search, MapPin } from 'lucide-react'
+import { Check, MapPin } from 'lucide-react'
 
 interface AreaOption {
   value: string
@@ -31,7 +31,6 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
   selectedValue,
   onSelect
 }) => {
-  const [searchTerm, setSearchTerm] = useState('')
   const [animatedGroups, setAnimatedGroups] = useState<string[]>([])
 
   // 地域別にオプションをグループ化
@@ -48,34 +47,14 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
     return groups
   }, [options])
 
-  // 検索フィルタリング
-  const filteredGroups = useMemo(() => {
-    if (!searchTerm) return groupedOptions
-    
-    const filtered: { [key: string]: AreaOption[] } = {}
-    
-    Object.entries(groupedOptions).forEach(([region, regionOptions]) => {
-      const matchingOptions = regionOptions.filter(option =>
-        option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        region.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      
-      if (matchingOptions.length > 0) {
-        filtered[region] = matchingOptions
-      }
-    })
-    
-    return filtered
-  }, [groupedOptions, searchTerm])
-
   useEffect(() => {
     // Stagger the animation of groups
-    Object.keys(filteredGroups).forEach((region, index) => {
+    Object.keys(groupedOptions).forEach((region, index) => {
       setTimeout(() => {
         setAnimatedGroups(prev => [...prev, region])
       }, index * 150)
     })
-  }, [filteredGroups])
+  }, [groupedOptions])
 
   const handleSelect = (value: string) => {
     onSelect(value)
@@ -92,29 +71,15 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* 検索バー */}
-      <div className="relative max-w-md mx-auto">
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input
-            type="text"
-            placeholder="エリアを検索..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-dark-accent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-glow-primary focus:border-transparent"
-          />
-        </div>
-      </div>
-
       {/* エリアグループ */}
       <div className="space-y-8">
-        {Object.entries(filteredGroups).length === 0 ? (
+        {Object.entries(groupedOptions).length === 0 ? (
           <div className="text-center py-12">
             <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-400 text-lg">該当するエリアが見つかりません</p>
           </div>
         ) : (
-          Object.entries(filteredGroups).map(([region, regionOptions]) => {
+          Object.entries(groupedOptions).map(([region, regionOptions]) => {
             const isAnimated = animatedGroups.includes(region)
             
             return (
@@ -146,7 +111,6 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
                       >
                         <Card
                           variant={isSelected ? "elevated" : "default"}
-                          selected={isSelected}
                           onClick={() => handleSelect(option.value)}
                           className={`text-center p-4 cursor-pointer group relative min-h-[120px] flex flex-col justify-center ${
                             isSelected 
@@ -156,13 +120,6 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
                           hoverable
                           animated
                         >
-                          {/* Selection indicator */}
-                          {isSelected && (
-                            <div className="absolute top-2 right-2 bg-glow-primary rounded-full p-1">
-                              <Check className="w-3 h-3 text-white" />
-                            </div>
-                          )}
-                          
                           {/* Icon */}
                           {option.icon && (
                             <div className={`text-3xl mb-2 transition-all duration-300 ${
@@ -177,8 +134,8 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
                           {/* Title */}
                           <h4 className={`text-sm font-bold transition-all duration-300 ${
                             isSelected 
-                              ? 'text-white' 
-                              : 'text-white group-hover:text-glow-primary'
+                              ? 'text-black' 
+                              : 'text-black group-hover:text-glow-primary'
                           }`}>
                             {option.label}
                           </h4>
