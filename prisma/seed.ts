@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcryptjs'
+import { PrismaClient, Area, ServiceType, BudgetRange } from '@prisma/client'
+import * as bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
@@ -46,55 +46,55 @@ async function main() {
   }
 
   // サンプルキャストデータを作成
-  // エリア名は Area enum のキー値を使用（String フィールドだが enum キーを格納）
+  // エナム値を直接使用
   const sampleCasts = [
     {
       name: '美咲',
       snsLink: 'https://twitter.com/misaki_cast',
       storeLink: 'https://example-store1.com',
-      area: 'SHIBUYA', // Area enum キーを使用
-      serviceType: 'KYABA',
-      budgetRange: 'FROM_20K_TO_30K'
+      area: Area.SHIBUYA, // Areaエナムを使用
+      serviceType: ServiceType.KYABA,
+      budgetRange: BudgetRange.FROM_20K_TO_30K
     },
     {
       name: 'あやか',
       snsLink: 'https://instagram.com/ayaka_cast',
       storeLink: 'https://example-store2.com',
-      area: 'SHINJUKU', // Area enum キーを使用
-      serviceType: 'GIRLS_BAR',
-      budgetRange: 'FROM_10K_TO_20K'
+      area: Area.SHINJUKU, // Areaエナムを使用
+      serviceType: ServiceType.GIRLS_BAR,
+      budgetRange: BudgetRange.FROM_10K_TO_20K
     },
     {
       name: 'ゆい',
       snsLink: 'https://twitter.com/yui_cast',
       storeLink: null,
-      area: 'GINZA', // Area enum キーを使用
-      serviceType: 'LOUNGE',
-      budgetRange: 'FROM_30K_TO_50K'
+      area: Area.GINZA, // Areaエナムを使用
+      serviceType: ServiceType.LOUNGE,
+      budgetRange: BudgetRange.FROM_30K_TO_50K
     },
     {
       name: 'りな',
       snsLink: 'https://instagram.com/rina_cast',
       storeLink: 'https://example-store3.com',
-      area: 'ROPPONGI', // Area enum キーを使用
-      serviceType: 'CLUB',
-      budgetRange: 'OVER_50K'
+      area: Area.ROPPONGI, // Areaエナムを使用
+      serviceType: ServiceType.CLUB,
+      budgetRange: BudgetRange.OVER_50K
     },
     {
       name: 'さくら',
       snsLink: 'https://twitter.com/sakura_cast',
       storeLink: 'https://example-store4.com',
-      area: 'IKEBUKURO', // Area enum キーを使用
-      serviceType: 'SNACK',
-      budgetRange: 'UNDER_10K'
+      area: Area.IKEBUKURO, // Areaエナムを使用
+      serviceType: ServiceType.SNACK,
+      budgetRange: BudgetRange.UNDER_10K
     },
     {
       name: 'まい',
       snsLink: 'https://instagram.com/mai_cast',
       storeLink: null,
-      area: 'AKASAKA', // Area enum キーを使用
-      serviceType: 'KYABA',
-      budgetRange: 'FROM_20K_TO_30K'
+      area: Area.AKASAKA, // Areaエナムを使用
+      serviceType: ServiceType.KYABA,
+      budgetRange: BudgetRange.FROM_20K_TO_30K
     }
   ]
 
