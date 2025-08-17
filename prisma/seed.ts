@@ -46,54 +46,55 @@ async function main() {
   }
 
   // サンプルキャストデータを作成
+  // エリア名は Area enum の key を使用（TypeScript の Cast interface に合わせる）
   const sampleCasts = [
     {
       name: '美咲',
       snsLink: 'https://twitter.com/misaki_cast',
       storeLink: 'https://example-store1.com',
-      area: '渋谷',
-      serviceType: 'キャバクラ',
-      budgetRange: '20,000円〜30,000円'
+      area: 'SHIBUYA', // Area enum key を使用
+      serviceType: 'KYABA',
+      budgetRange: 'FROM_20K_TO_30K'
     },
     {
       name: 'あやか',
       snsLink: 'https://instagram.com/ayaka_cast',
       storeLink: 'https://example-store2.com',
-      area: '新宿',
-      serviceType: 'ガールズバー',
-      budgetRange: '10,000円〜20,000円'
+      area: 'SHINJUKU', // Area enum key を使用
+      serviceType: 'GIRLS_BAR',
+      budgetRange: 'FROM_10K_TO_20K'
     },
     {
       name: 'ゆい',
       snsLink: 'https://twitter.com/yui_cast',
       storeLink: null,
-      area: '銀座',
-      serviceType: 'ラウンジ',
-      budgetRange: '30,000円〜50,000円'
+      area: 'GINZA', // Area enum key を使用
+      serviceType: 'LOUNGE',
+      budgetRange: 'FROM_30K_TO_50K'
     },
     {
       name: 'りな',
       snsLink: 'https://instagram.com/rina_cast',
       storeLink: 'https://example-store3.com',
-      area: '六本木',
-      serviceType: 'クラブ',
-      budgetRange: '50,000円以上'
+      area: 'ROPPONGI', // Area enum key を使用
+      serviceType: 'CLUB',
+      budgetRange: 'OVER_50K'
     },
     {
       name: 'さくら',
       snsLink: 'https://twitter.com/sakura_cast',
       storeLink: 'https://example-store4.com',
-      area: '池袋',
-      serviceType: 'スナック',
-      budgetRange: '10,000円未満'
+      area: 'IKEBUKURO', // Area enum key を使用
+      serviceType: 'SNACK',
+      budgetRange: 'UNDER_10K'
     },
     {
       name: 'まい',
       snsLink: 'https://instagram.com/mai_cast',
       storeLink: null,
-      area: '赤坂',
-      serviceType: 'キャバクラ',
-      budgetRange: '20,000円〜30,000円'
+      area: 'AKASAKA', // Area enum key を使用
+      serviceType: 'KYABA',
+      budgetRange: 'FROM_20K_TO_30K'
     }
   ]
 
