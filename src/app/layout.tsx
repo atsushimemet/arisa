@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased px-4 sm:px-6 lg:px-8 font-ios`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-ios`}
       >
         <MobileConsoleProvider>
           {children}
