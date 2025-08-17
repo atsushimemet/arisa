@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -15,9 +15,9 @@ model Cast {
   name        String
   snsLink     String   @unique
   storeLink   String?
-  area        Area
-  serviceType ServiceType
-  budgetRange BudgetRange
+  area        String
+  serviceType String
+  budgetRange String
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -48,30 +48,31 @@ model Admin {
   @@map("admins")
 }
 
-enum Area {
-  SHIBUYA
-  SHINJUKU
-  GINZA
-  ROPPONGI
-  IKEBUKURO
-  AKASAKA
-  KABUKICHO
-  OTHER
-}
+// SQLite doesn't support enums, so we use strings with validation in the app
+// enum Area {
+//   SHIBUYA
+//   SHINJUKU
+//   GINZA
+//   ROPPONGI
+//   IKEBUKURO
+//   AKASAKA
+//   KABUKICHO
+//   OTHER
+// }
 
-enum ServiceType {
-  KYABA
-  GIRLS_BAR
-  SNACK
-  LOUNGE
-  CLUB
-  OTHER
-}
+// enum ServiceType {
+//   KYABA
+//   GIRLS_BAR
+//   SNACK
+//   LOUNGE
+//   CLUB
+//   OTHER
+// }
 
-enum BudgetRange {
-  UNDER_10K
-  FROM_10K_TO_20K
-  FROM_20K_TO_30K
-  FROM_30K_TO_50K
-  OVER_50K
-}
+// enum BudgetRange {
+//   UNDER_10K
+//   FROM_10K_TO_20K
+//   FROM_20K_TO_30K
+//   FROM_30K_TO_50K
+//   OVER_50K
+// }

@@ -13,13 +13,15 @@ export default function OnboardingPage() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [data, setData] = useState<OnboardingData>({})
-  const { areaOptions: dynamicAreaOptions, loading: areasLoading } = useAreas()
+  const { areaOptions: dynamicAreaOptions, loading: areasLoading, error: areasError } = useAreas()
 
   const areaOptions = dynamicAreaOptions.map(({ value, label }) => ({
     value,
     label,
     icon: getAreaIcon(value as Area)
   }))
+
+
 
   const serviceTypeOptions = Object.entries(SERVICE_TYPE_LABELS).map(([value, label]) => ({
     value,
@@ -165,6 +167,18 @@ export default function OnboardingPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-glow-primary mx-auto mb-4"></div>
           <p className="text-gray-300 text-lg">エリア情報を読み込み中...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (areasError) {
+    return (
+      <div className="min-h-screen bg-dark-gradient flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-400 text-6xl mb-4">⚠️</div>
+          <p className="text-gray-300 text-lg mb-4">エリア情報の読み込みでエラーが発生しました</p>
+          <p className="text-red-400 text-sm">{areasError}</p>
         </div>
       </div>
     )
