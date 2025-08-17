@@ -71,14 +71,18 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               variant={isSelected ? "elevated" : "default"}
               selected={isSelected}
               onClick={() => handleSelect(option.value)}
-              className="text-center p-8 cursor-pointer group relative min-h-[180px] flex flex-col justify-center"
+              className={`text-center p-8 cursor-pointer group relative min-h-[180px] flex flex-col justify-center ${
+                isSelected 
+                  ? 'border-2 border-blue-500 shadow-lg' 
+                  : 'border border-gray-300 hover:border-gray-400 hover:shadow-md'
+              }`}
               hoverable
               animated
             >
               {/* Selection indicator */}
               {isSelected && (
-                <div className="absolute top-4 right-4 bg-gradient-to-r from-laser-green to-neon-cyan rounded-full p-2 animate-bounce-glow">
-                  <Check className="w-4 h-4 text-black" />
+                <div className="absolute top-4 right-4 bg-blue-500 rounded-full p-2">
+                  <Check className="w-4 h-4 text-white" />
                 </div>
               )}
               
@@ -94,10 +98,10 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               )}
               
               {/* Title - Always visible */}
-              <h3 className={`text-xl font-bold mb-3 transition-all duration-300 ${
+              <h3 className={`text-2xl font-extrabold mb-3 transition-all duration-300 ${
                 isSelected 
-                  ? 'text-white glow-text-green' 
-                  : 'text-white group-hover:glow-text-cyan'
+                  ? 'text-black' 
+                  : 'text-black group-hover:text-gray-800'
               }`}>
                 {option.label}
               </h3>
@@ -106,19 +110,19 @@ export const SelectionGrid: React.FC<SelectionGridProps> = ({
               {option.description && (
                 <p className={`text-sm leading-relaxed transition-all duration-300 ${
                   isSelected 
-                    ? 'text-gray-200' 
-                    : 'text-gray-300 group-hover:text-gray-200'
+                    ? 'text-gray-700' 
+                    : 'text-gray-600 group-hover:text-gray-700'
                 }`}>
                   {option.description}
                 </p>
               )}
               
               {/* Hover effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-glow-primary/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
               {/* Selection pulse effect */}
               {isSelected && (
-                <div className="absolute inset-0 bg-gradient-to-r from-laser-green/20 to-neon-cyan/20 rounded-xl animate-pulse" />
+                <div className="absolute inset-0 bg-blue-50 rounded-xl animate-pulse" />
               )}
             </Card>
           </div>
