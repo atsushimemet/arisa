@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { OnboardingStep } from '@/components/onboarding/OnboardingStep'
 import { SelectionGrid } from '@/components/onboarding/SelectionGrid'
+import { AreaSelectionGrid } from '@/components/onboarding/AreaSelectionGrid'
 import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, OnboardingData } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
 
@@ -18,7 +19,7 @@ export default function OnboardingPage() {
   const areaOptions = dynamicAreaOptions.map(({ value, label }) => ({
     value,
     label,
-    icon: getAreaIcon(value as Area)
+    icon: getAreaIcon(value)
   }))
 
 
@@ -99,18 +100,17 @@ export default function OnboardingPage() {
         return (
           <OnboardingStep
             title="エリアを選択してください"
-            subtitle="どちらのエリアをお探しですか？"
+            subtitle="全国の繁華街エリアからお選びください"
             currentStep={currentStep}
             totalSteps={TOTAL_STEPS}
             onNext={handleNext}
             onBack={handleBack}
             canProceed={canProceed()}
           >
-            <SelectionGrid
+            <AreaSelectionGrid
               options={areaOptions}
               selectedValue={data.area}
               onSelect={(value) => setData({ ...data, area: value as Area })}
-              columns={3}
             />
           </OnboardingStep>
         )
@@ -187,18 +187,60 @@ export default function OnboardingPage() {
   return renderStepContent()
 }
 
-function getAreaIcon(area: Area): string {
-  const icons = {
-    [Area.SHIBUYA]: '🌃',
-    [Area.SHINJUKU]: '🏙️',
-    [Area.GINZA]: '💎',
-    [Area.ROPPONGI]: '🌆',
-    [Area.IKEBUKURO]: '🎯',
-    [Area.AKASAKA]: '🏛️',
-    [Area.KABUKICHO]: '🎭',
-    [Area.OTHER]: '📍'
+function getAreaIcon(areaKey: string): string {
+  const icons: { [key: string]: string } = {
+    // 東京
+    'SHIBUYA': '🌃',
+    'SHINJUKU': '🏙️',
+    'GINZA': '💎',
+    'ROPPONGI': '🌆',
+    'IKEBUKURO': '🎯',
+    'AKASAKA': '🏛️',
+    'KABUKICHO': '🎭',
+    
+    // 関東
+    'YOKOHAMA': '🌊',
+    'OMIYA': '🚄',
+    'CHIBA': '🌸',
+    
+    // 北海道・東北
+    'SUSUKINO': '❄️',
+    'SENDAI': '🌲',
+    
+    // 中部
+    'NISHIKI': '🏮',
+    'SAKAE': '🌟',
+    'SHIZUOKA': '🗻',
+    'NIIGATA': '🍚',
+    
+    // 関西
+    'KITASHINCHI': '🍻',
+    'NAMBA': '🎪',
+    'UMEDA': '🏢',
+    'TOBITA': '🏮',
+    'KYOTO_GION': '⛩️',
+    'KYOTO_PONTOCHO': '🎋',
+    'KOBE_SANNOMIYA': '⚓',
+    'KOBE_KITANO': '🏰',
+    
+    // 中国・四国
+    'HIROSHIMA': '🕊️',
+    'OKAYAMA': '🍑',
+    'MATSUYAMA': '♨️',
+    'TAKAMATSU': '🌉',
+    
+    // 九州・沖縄
+    'NAKASU': '🏮',
+    'TENJIN': '🎌',
+    'KUMAMOTO': '🏯',
+    'KAGOSHIMA': '🌋',
+    'NAHA': '🏖️',
+    'KOKUSAIDORI': '🌺',
+    
+    // その他
+    'OTHER': '📍'
   }
-  return icons[area] || '📍'
+  return icons[areaKey] || '📍'
 }
 
 function getServiceTypeIcon(serviceType: ServiceType): string {

@@ -175,7 +175,7 @@ export function ResultsClient() {
             </div>
 
             {/* Results count */}
-            <div className="flex items-center justify-center gap-2 text-black">
+            <div className="flex items-center justify-center gap-2 text-white">
               <Users className="w-5 h-5" />
               <span className="text-lg">
                 <span className="font-bold">{casts.length}</span> 人のキャストが見つかりました
