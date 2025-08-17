@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
-import { ChevronLeft, ChevronRight, Zap } from 'lucide-react'
+import { Zap } from 'lucide-react'
 
 interface OnboardingStepProps {
   title: string
@@ -125,7 +125,6 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               <Button
                 variant="outline"
                 onClick={onBack}
-                icon={<ChevronLeft className="w-5 h-5" />}
                 className="px-6 sm:px-8 py-3"
               >
                 {backLabel}
@@ -140,11 +139,9 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 onClick={onNext}
                 disabled={!canProceed}
                 size="lg"
-                icon={nextLabel === "始める" ? undefined : <ChevronRight className="w-5 h-5" />}
-                className="px-8 sm:px-12 py-4 group"
+                className="px-8 sm:px-12 py-4"
               >
-                <span className={nextLabel === "始める" ? "" : "mr-2"}>{nextLabel}</span>
-                {nextLabel !== "始める" && <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                {nextLabel}
               </Button>
             )}
           </div>
