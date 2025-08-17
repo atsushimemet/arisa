@@ -10,17 +10,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// PostgreSQL supports enums, and we use them for type safety
+enum Area {
+  SHIBUYA
+  SHINJUKU
+  GINZA
+  ROPPONGI
+  IKEBUKURO
+  AKASAKA
+  KABUKICHO
+  OTHER
+}
+
+enum ServiceType {
+  KYABA
+  GIRLS_BAR
+  SNACK
+  LOUNGE
+  CLUB
+  OTHER
+}
+
+enum BudgetRange {
+  UNDER_10K
+  FROM_10K_TO_20K
+  FROM_20K_TO_30K
+  FROM_30K_TO_50K
+  OVER_50K
+}
+
 model Cast {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   name        String
-  snsLink     String   @unique
+  snsLink     String      @unique
   storeLink   String?
-  area        String
-  serviceType String
-  budgetRange String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  area        Area
+  serviceType ServiceType
+  budgetRange BudgetRange
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@map("casts")
 }
@@ -47,32 +76,3 @@ model Admin {
 
   @@map("admins")
 }
-
-// PostgreSQL supports enums, but we keep them as strings for compatibility
-// enum Area {
-//   SHIBUYA
-//   SHINJUKU
-//   GINZA
-//   ROPPONGI
-//   IKEBUKURO
-//   AKASAKA
-//   KABUKICHO
-//   OTHER
-// }
-
-// enum ServiceType {
-//   KYABA
-//   GIRLS_BAR
-//   SNACK
-//   LOUNGE
-//   CLUB
-//   OTHER
-// }
-
-// enum BudgetRange {
-//   UNDER_10K
-//   FROM_10K_TO_20K
-//   FROM_20K_TO_30K
-//   FROM_30K_TO_50K
-//   OVER_50K
-// }
