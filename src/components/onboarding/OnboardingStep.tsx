@@ -140,11 +140,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 onClick={onNext}
                 disabled={!canProceed}
                 size="lg"
-                icon={<ChevronRight className="w-5 h-5" />}
+                icon={nextLabel === "始める" ? undefined : <ChevronRight className="w-5 h-5" />}
                 className="px-8 sm:px-12 py-4 group"
               >
-                <span className="mr-2">{nextLabel}</span>
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className={nextLabel === "始める" ? "" : "mr-2"}>{nextLabel}</span>
+                {nextLabel !== "始める" && <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
               </Button>
             )}
           </div>
