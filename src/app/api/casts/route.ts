@@ -137,14 +137,19 @@ export async function POST(request: NextRequest) {
     console.error('キャスト作成エラー:', error)
     
     // エラー情報を詳細にログ出力（コピー可能な形式で）
-    const errorInfo = {
+    const errorInfo: Record<string, unknown> = {
       timestamp: new Date().toISOString(),
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
-      ...(error && typeof error === 'object' && 'code' in error && {
-        prismaCode: error.code,
-        prismaMeta: 'meta' in error ? error.meta : undefined
-      })
+    }
+    
+    // Prismaエラーの場合は追加情報を含める
+    if (error && typeof error === 'object' && 'code' in error) {
+      const prismaError = error as { code: string; meta?: unknown }
+      errorInfo.prismaCode = prismaError.code
+      if ('meta' in error) {
+        errorInfo.prismaMeta = prismaError.meta
+      }
     }
     
     console.error('=== キャスト作成エラー詳細（コピー用） ===')
