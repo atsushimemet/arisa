@@ -86,7 +86,6 @@ export default function Home() {
                 className="text-lg sm:text-xl font-semibold w-full sm:w-auto"
               >
                 キャストを探す
-                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 
                 onClick={() => router.push('/admin')}

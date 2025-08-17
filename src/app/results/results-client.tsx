@@ -81,11 +81,11 @@ export function ResultsClient() {
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-16 border-4 border-t-transparent border-r-glow-primary border-b-transparent border-l-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }}></div>
             </div>
             
-            <h2 className="text-2xl font-bold text-white mb-4 glow-text-cyan">
+            <h2 className="text-2xl font-bold text-black mb-4">
               キャストを検索中
               <span className="loading-dots"></span>
             </h2>
-            <p className="text-gray-300 text-lg">
+            <p className="text-gray-700 text-lg">
               あなたにぴったりのキャストを探しています
             </p>
             
@@ -110,8 +110,8 @@ export function ResultsClient() {
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
           <Card variant="elevated" className="text-center max-w-md p-12">
             <div className="text-8xl mb-8 animate-bounce-glow">😔</div>
-            <h2 className="text-3xl font-bold text-white mb-6 glow-text-orange">エラーが発生しました</h2>
-            <p className="text-gray-300 mb-8 leading-relaxed">{error}</p>
+            <h2 className="text-3xl font-bold text-black mb-6">エラーが発生しました</h2>
+            <p className="text-gray-700 mb-8 leading-relaxed">{error}</p>
             
             <div className="flex flex-col space-y-4">
               <Button 
@@ -157,28 +157,28 @@ export function ResultsClient() {
               {area && (
                 <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-neon-cyan" />
-                  <span className="text-neon-cyan font-semibold">{getAreaLabel(area)}</span>
+                  <span className="text-black font-semibold">{getAreaLabel(area)}</span>
                 </Card>
               )}
               {serviceType && (
                 <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <Star className="w-5 h-5 text-neon-purple" />
-                  <span className="text-neon-purple font-semibold">{SERVICE_TYPE_LABELS[serviceType]}</span>
+                  <span className="text-black font-semibold">{SERVICE_TYPE_LABELS[serviceType]}</span>
                 </Card>
               )}
               {budgetRange && (
                 <Card variant="glass" className="px-6 py-3 flex items-center gap-2">
                   <DollarSign className="w-5 h-5 text-laser-green" />
-                  <span className="text-laser-green font-semibold">{BUDGET_RANGE_LABELS[budgetRange]}</span>
+                  <span className="text-black font-semibold">{BUDGET_RANGE_LABELS[budgetRange]}</span>
                 </Card>
               )}
             </div>
 
             {/* Results count */}
-            <div className="flex items-center justify-center gap-2 text-gray-300">
+            <div className="flex items-center justify-center gap-2 text-black">
               <Users className="w-5 h-5" />
               <span className="text-lg">
-                <span className="glow-text-cyan font-bold">{casts.length}</span> 人のキャストが見つかりました
+                <span className="font-bold">{casts.length}</span> 人のキャストが見つかりました
               </span>
               <Sparkles className="w-5 h-5 text-game-gold animate-bounce-glow" />
             </div>
@@ -216,7 +216,7 @@ export function ResultsClient() {
                 >
                   {/* Cast info */}
                   <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2 glow-text-green group-hover:glow-text-cyan transition-all duration-300">
+                    <h3 className="text-2xl font-bold text-black mb-2 group-hover:text-gray-800 transition-all duration-300">
                       {cast.name}
                     </h3>
                     
@@ -264,10 +264,10 @@ export function ResultsClient() {
             <div className={`text-center transition-all duration-1000 delay-500 ${isAnimated ? 'animate-fade-in' : 'opacity-0'}`}>
               <Card variant="glass" className="p-12 max-w-2xl mx-auto">
                 <div className="text-8xl mb-8 animate-float">🔍</div>
-                <h2 className="text-3xl font-bold text-white mb-6 glow-text-cyan">
+                <h2 className="text-3xl font-bold text-black mb-6">
                   該当するキャストが見つかりませんでした
                 </h2>
-                <p className="text-gray-300 mb-8 text-lg leading-relaxed">
+                <p className="text-gray-700 mb-8 text-lg leading-relaxed">
                   検索条件を変更して、再度お試しください。
                   <br />
                   より多くのキャストが見つかるかもしれません。
