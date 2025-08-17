@@ -269,6 +269,18 @@ select:focus {
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
 }
 
+.bg-dark-primary {
+  background-color: #0f1419;
+}
+
+.bg-dark-card {
+  background-color: #1a1f2e;
+}
+
+.bg-dark-accent {
+  background-color: #2a2f3e;
+}
+
 /* Glow text effects */
 .glow-text {
   color: #ffffff;
@@ -276,18 +288,18 @@ select:focus {
 }
 
 .glow-text-green {
-  color: #34C759;
-  text-shadow: 0 0 10px rgba(52, 199, 89, 0.5);
+  color: #39FF14;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.8), 0 0 20px rgba(57, 255, 20, 0.4);
 }
 
 .glow-text-cyan {
-  color: #5AC8FA;
-  text-shadow: 0 0 10px rgba(90, 200, 250, 0.5);
+  color: #00FFFF;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
 }
 
 .glow-text-purple {
-  color: #AF52DE;
-  text-shadow: 0 0 10px rgba(175, 82, 222, 0.5);
+  color: #BF00FF;
+  text-shadow: 0 0 10px rgba(191, 0, 255, 0.8), 0 0 20px rgba(191, 0, 255, 0.4);
 }
 
 .glow-text-orange {
@@ -328,6 +340,64 @@ select:focus {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Slide in down animation */
+.animate-slide-in-down {
+  animation: slide-in-down 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes slide-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse glow animation */
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+}
+
+/* Fade in animation */
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+/* Shimmer animation */
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.bg-shimmer-overlay {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.bg-200\% {
+  background-size: 200% 100%;
+}
+
+/* Shadow effects */
+.shadow-neon {
+  box-shadow: 0 0 20px rgba(90, 200, 250, 0.5), 0 0 40px rgba(90, 200, 250, 0.3);
 }
 
 /* Bounce glow animation */
@@ -377,9 +447,57 @@ select:focus {
   80%, 100% { content: '...'; }
 }
 
-/* Glow primary color */
+/* Glow colors */
 .border-glow-primary {
   border-color: #5AC8FA;
+}
+
+.text-glow-primary {
+  color: #5AC8FA;
+}
+
+.bg-glow-primary {
+  background-color: #5AC8FA;
+}
+
+.text-glow-secondary {
+  color: #AF52DE;
+}
+
+.bg-glow-secondary {
+  background-color: #AF52DE;
+}
+
+.text-neon-cyan {
+  color: #00FFFF;
+}
+
+.bg-neon-cyan {
+  background-color: #00FFFF;
+}
+
+.border-neon-cyan {
+  border-color: #00FFFF;
+}
+
+.text-laser-green {
+  color: #39FF14;
+}
+
+.bg-laser-green {
+  background-color: #39FF14;
+}
+
+.border-laser-green {
+  border-color: #39FF14;
+}
+
+.text-neon-purple {
+  color: #BF00FF;
+}
+
+.border-neon-purple {
+  border-color: #BF00FF;
 }
 
 /* Game gold color */
