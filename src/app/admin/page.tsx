@@ -195,7 +195,7 @@ export default function AdminPage() {
               {casts.map((cast) => (
                 <Card key={cast.id} className="relative">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-white">{cast.name}</h3>
+                    <h3 className="text-xl font-bold text-black">{cast.name}</h3>
                     <div className={`px-2 py-1 rounded-full text-xs font-medium ${
                       cast.isActive 
                         ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
@@ -207,13 +207,13 @@ export default function AdminPage() {
 
                   <div className="space-y-2 mb-4">
                     <div className="flex flex-wrap gap-2 mb-2">
-                      <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                      <span className="text-xs bg-gray-700 text-white px-2 py-1 rounded">
                         📍 {getAreaLabel(cast.area)}
                       </span>
-                      <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                      <span className="text-xs bg-gray-700 text-white px-2 py-1 rounded">
                         🍸 {SERVICE_TYPE_LABELS[cast.serviceType]}
                       </span>
-                      <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                      <span className="text-xs bg-gray-700 text-white px-2 py-1 rounded">
                         💰 {BUDGET_RANGE_LABELS[cast.budgetRange]}
                       </span>
                     </div>
