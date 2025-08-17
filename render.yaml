@@ -17,6 +17,10 @@ services:
         value: https://arisa.onrender.com
       - key: SEED
         value: "true"
+      - key: PRISMA_CLI_QUERY_ENGINE_TYPE
+        value: binary
+      - key: PRISMA_GENERATE_SKIP_AUTOINSTALL
+        value: "true"
 
 databases:
   - name: arisa-db
