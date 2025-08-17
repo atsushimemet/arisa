@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS, Cast } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
 import { Search, Filter, RefreshCw, ArrowLeft, Home, Users, Star, MapPin, DollarSign, ExternalLink, Sparkles } from 'lucide-react'
+import { mobileLog } from '@/components/MobileConsole'
 
 export function ResultsClient() {
   const searchParams = useSearchParams()
@@ -21,6 +22,15 @@ export function ResultsClient() {
   const area = searchParams.get('area') as Area
   const serviceType = searchParams.get('serviceType') as ServiceType
   const budgetRange = searchParams.get('budgetRange') as BudgetRange
+
+  // Debug logging for search parameters
+  useEffect(() => {
+    mobileLog.info('Search parameters received:', {
+      area,
+      serviceType,
+      budgetRange
+    })
+  }, [area, serviceType, budgetRange])
 
   useEffect(() => {
     setIsAnimated(true)
@@ -37,15 +47,25 @@ export function ResultsClient() {
         if (serviceType) params.set('serviceType', serviceType)
         if (budgetRange) params.set('budgetRange', budgetRange)
 
-        const response = await fetch(`/api/casts?${params.toString()}`)
+        const apiUrl = `/api/casts?${params.toString()}`
+        mobileLog.info(`Making API request to: ${apiUrl}`)
+
+        const response = await fetch(apiUrl)
+        mobileLog.info(`API response status: ${response.status}`)
+        
         if (!response.ok) {
+          const errorData = await response.json()
+          mobileLog.error(`API error response:`, errorData)
           throw new Error('キャストの取得に失敗しました')
         }
 
         const data = await response.json()
+        mobileLog.info(`API response data:`, { count: data.length, data: data.slice(0, 2) })
         setCasts(data)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'エラーが発生しました')
+        const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+        mobileLog.error(`Fetch error: ${errorMessage}`, err)
+        setError(errorMessage)
       } finally {
         setLoading(false)
       }

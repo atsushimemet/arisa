@@ -111,6 +111,7 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
                       >
                         <Card
                           variant={isSelected ? "elevated" : "default"}
+                          selected={isSelected}
                           onClick={() => handleSelect(option.value)}
                           className={`text-center p-4 cursor-pointer group relative min-h-[120px] flex flex-col justify-center ${
                             isSelected 

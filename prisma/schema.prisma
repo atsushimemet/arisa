@@ -12,6 +12,7 @@ datasource db {
 
 // PostgreSQL supports enums, and we use them for type safety
 enum Area {
+  // 東京
   SHIBUYA
   SHINJUKU
   GINZA
@@ -19,6 +20,46 @@ enum Area {
   IKEBUKURO
   AKASAKA
   KABUKICHO
+  
+  // 関東
+  YOKOHAMA
+  OMIYA
+  CHIBA
+  
+  // 北海道・東北
+  SUSUKINO
+  SENDAI
+  
+  // 中部
+  NISHIKI
+  SAKAE
+  SHIZUOKA
+  NIIGATA
+  
+  // 関西
+  KITASHINCHI
+  NAMBA
+  UMEDA
+  TOBITA
+  KYOTO_GION
+  KYOTO_PONTOCHO
+  KOBE_SANNOMIYA
+  KOBE_KITANO
+  
+  // 中国・四国
+  HIROSHIMA
+  OKAYAMA
+  MATSUYAMA
+  TAKAMATSU
+  
+  // 九州・沖縄
+  NAKASU
+  TENJIN
+  KUMAMOTO
+  KAGOSHIMA
+  NAHA
+  KOKUSAIDORI
+  
   OTHER
 }
 

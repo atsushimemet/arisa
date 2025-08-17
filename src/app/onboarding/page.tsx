@@ -50,6 +50,39 @@ export default function OnboardingPage() {
     }
   }
 
+  // Auto-advance when selection is made
+  const handleAreaSelect = (value: string) => {
+    const newData = { ...data, area: value as Area }
+    setData(newData)
+    // Auto-advance to next step after a short delay for visual feedback
+    setTimeout(() => {
+      setCurrentStep(3)
+    }, 300)
+  }
+
+  const handleServiceTypeSelect = (value: string) => {
+    const newData = { ...data, serviceType: value as ServiceType }
+    setData(newData)
+    // Auto-advance to next step after a short delay for visual feedback
+    setTimeout(() => {
+      setCurrentStep(4)
+    }, 300)
+  }
+
+  const handleBudgetRangeSelect = (value: string) => {
+    const newData = { ...data, budgetRange: value as BudgetRange }
+    setData(newData)
+    // Auto-advance to results page after a short delay for visual feedback
+    setTimeout(() => {
+      const params = new URLSearchParams()
+      if (newData.area) params.set('area', newData.area)
+      if (newData.serviceType) params.set('serviceType', newData.serviceType)
+      if (newData.budgetRange) params.set('budgetRange', newData.budgetRange)
+      
+      router.push(`/results?${params.toString()}`)
+    }, 300)
+  }
+
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
@@ -103,14 +136,13 @@ export default function OnboardingPage() {
             subtitle="全国の繁華街エリアからお選びください"
             currentStep={currentStep}
             totalSteps={TOTAL_STEPS}
-            onNext={handleNext}
             onBack={handleBack}
             canProceed={canProceed()}
           >
             <AreaSelectionGrid
               options={areaOptions}
               selectedValue={data.area}
-              onSelect={(value) => setData({ ...data, area: value as Area })}
+              onSelect={handleAreaSelect}
             />
           </OnboardingStep>
         )
@@ -122,14 +154,13 @@ export default function OnboardingPage() {
             subtitle="どのような雰囲気をお求めですか？"
             currentStep={currentStep}
             totalSteps={TOTAL_STEPS}
-            onNext={handleNext}
             onBack={handleBack}
             canProceed={canProceed()}
           >
             <SelectionGrid
               options={serviceTypeOptions}
               selectedValue={data.serviceType}
-              onSelect={(value) => setData({ ...data, serviceType: value as ServiceType })}
+              onSelect={handleServiceTypeSelect}
               columns={2}
             />
           </OnboardingStep>
@@ -142,15 +173,13 @@ export default function OnboardingPage() {
             subtitle="ご予算の範囲を教えてください"
             currentStep={currentStep}
             totalSteps={TOTAL_STEPS}
-            onNext={handleNext}
             onBack={handleBack}
-            nextLabel="キャストを探す"
             canProceed={canProceed()}
           >
             <SelectionGrid
               options={budgetOptions}
               selectedValue={data.budgetRange}
-              onSelect={(value) => setData({ ...data, budgetRange: value as BudgetRange })}
+              onSelect={handleBudgetRangeSelect}
               columns={2}
             />
           </OnboardingStep>

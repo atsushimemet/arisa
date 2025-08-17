@@ -11,6 +11,8 @@ export async function GET(request: NextRequest) {
     const budgetRange = searchParams.get('budgetRange') as BudgetRange | null
     const includeInactive = searchParams.get('includeInactive') === 'true'
 
+    console.log('Casts API - Search parameters:', { area, serviceType, budgetRange, includeInactive })
+
     // フィルター条件を構築
     const where: Prisma.CastWhereInput = {}
 
@@ -21,15 +23,20 @@ export async function GET(request: NextRequest) {
 
     if (area) {
       where.area = area
+      console.log(`Filtering by area: ${area}`)
     }
 
     if (serviceType) {
       where.serviceType = serviceType
+      console.log(`Filtering by serviceType: ${serviceType}`)
     }
 
     if (budgetRange) {
       where.budgetRange = budgetRange
+      console.log(`Filtering by budgetRange: ${budgetRange}`)
     }
+
+    console.log('Prisma where clause:', JSON.stringify(where, null, 2))
 
     // キャストを検索
     const casts = await prisma.cast.findMany({
@@ -38,6 +45,11 @@ export async function GET(request: NextRequest) {
         createdAt: 'desc'
       }
     })
+
+    console.log(`Found ${casts.length} casts matching criteria`)
+    if (casts.length > 0) {
+      console.log('Sample cast:', JSON.stringify(casts[0], null, 2))
+    }
 
     return NextResponse.json(casts)
   } catch (error) {

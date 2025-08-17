@@ -1,4 +1,5 @@
 export enum Area {
+  // 東京
   SHIBUYA = 'SHIBUYA',
   SHINJUKU = 'SHINJUKU',
   GINZA = 'GINZA',
@@ -6,6 +7,46 @@ export enum Area {
   IKEBUKURO = 'IKEBUKURO',
   AKASAKA = 'AKASAKA',
   KABUKICHO = 'KABUKICHO',
+  
+  // 関東
+  YOKOHAMA = 'YOKOHAMA',
+  OMIYA = 'OMIYA',
+  CHIBA = 'CHIBA',
+  
+  // 北海道・東北
+  SUSUKINO = 'SUSUKINO',
+  SENDAI = 'SENDAI',
+  
+  // 中部
+  NISHIKI = 'NISHIKI',
+  SAKAE = 'SAKAE',
+  SHIZUOKA = 'SHIZUOKA',
+  NIIGATA = 'NIIGATA',
+  
+  // 関西
+  KITASHINCHI = 'KITASHINCHI',
+  NAMBA = 'NAMBA',
+  UMEDA = 'UMEDA',
+  TOBITA = 'TOBITA',
+  KYOTO_GION = 'KYOTO_GION',
+  KYOTO_PONTOCHO = 'KYOTO_PONTOCHO',
+  KOBE_SANNOMIYA = 'KOBE_SANNOMIYA',
+  KOBE_KITANO = 'KOBE_KITANO',
+  
+  // 中国・四国
+  HIROSHIMA = 'HIROSHIMA',
+  OKAYAMA = 'OKAYAMA',
+  MATSUYAMA = 'MATSUYAMA',
+  TAKAMATSU = 'TAKAMATSU',
+  
+  // 九州・沖縄
+  NAKASU = 'NAKASU',
+  TENJIN = 'TENJIN',
+  KUMAMOTO = 'KUMAMOTO',
+  KAGOSHIMA = 'KAGOSHIMA',
+  NAHA = 'NAHA',
+  KOKUSAIDORI = 'KOKUSAIDORI',
+  
   OTHER = 'OTHER'
 }
 
@@ -56,6 +97,7 @@ export interface OnboardingData {
 }
 
 export const AREA_LABELS: Record<Area, string> = {
+  // 東京
   [Area.SHIBUYA]: '渋谷',
   [Area.SHINJUKU]: '新宿',
   [Area.GINZA]: '銀座',
@@ -63,6 +105,46 @@ export const AREA_LABELS: Record<Area, string> = {
   [Area.IKEBUKURO]: '池袋',
   [Area.AKASAKA]: '赤坂',
   [Area.KABUKICHO]: '歌舞伎町',
+  
+  // 関東
+  [Area.YOKOHAMA]: '横浜',
+  [Area.OMIYA]: '大宮',
+  [Area.CHIBA]: '千葉',
+  
+  // 北海道・東北
+  [Area.SUSUKINO]: 'すすきの',
+  [Area.SENDAI]: '仙台',
+  
+  // 中部
+  [Area.NISHIKI]: '錦',
+  [Area.SAKAE]: '栄',
+  [Area.SHIZUOKA]: '静岡',
+  [Area.NIIGATA]: '新潟',
+  
+  // 関西
+  [Area.KITASHINCHI]: '北新地',
+  [Area.NAMBA]: '難波',
+  [Area.UMEDA]: '梅田',
+  [Area.TOBITA]: '飛田',
+  [Area.KYOTO_GION]: '祇園',
+  [Area.KYOTO_PONTOCHO]: '先斗町',
+  [Area.KOBE_SANNOMIYA]: '三宮',
+  [Area.KOBE_KITANO]: '北野',
+  
+  // 中国・四国
+  [Area.HIROSHIMA]: '広島',
+  [Area.OKAYAMA]: '岡山',
+  [Area.MATSUYAMA]: '松山',
+  [Area.TAKAMATSU]: '高松',
+  
+  // 九州・沖縄
+  [Area.NAKASU]: '中洲',
+  [Area.TENJIN]: '天神',
+  [Area.KUMAMOTO]: '熊本',
+  [Area.KAGOSHIMA]: '鹿児島',
+  [Area.NAHA]: '那覇',
+  [Area.KOKUSAIDORI]: '国際通り',
+  
   [Area.OTHER]: 'その他'
 }
 
