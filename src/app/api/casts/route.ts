@@ -139,7 +139,9 @@ export async function POST(request: NextRequest) {
     // Prismaエラーの詳細を確認
     if (error && typeof error === 'object' && 'code' in error) {
       console.error('Prisma エラーコード:', error.code)
-      console.error('Prisma エラーメタ:', error.meta)
+      if ('meta' in error) {
+        console.error('Prisma エラーメタ:', error.meta)
+      }
     }
     
     return NextResponse.json(
