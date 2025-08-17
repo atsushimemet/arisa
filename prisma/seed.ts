@@ -46,13 +46,13 @@ async function main() {
   }
 
   // サンプルキャストデータを作成
-  // エリア名は Area enum の key を使用（TypeScript の Cast interface に合わせる）
+  // エリア名は AreaMaster の label を使用（String フィールドに合わせる）
   const sampleCasts = [
     {
       name: '美咲',
       snsLink: 'https://twitter.com/misaki_cast',
       storeLink: 'https://example-store1.com',
-      area: 'SHIBUYA', // Area enum key を使用
+      area: '渋谷', // AreaMaster の label を使用
       serviceType: 'KYABA',
       budgetRange: 'FROM_20K_TO_30K'
     },
@@ -60,7 +60,7 @@ async function main() {
       name: 'あやか',
       snsLink: 'https://instagram.com/ayaka_cast',
       storeLink: 'https://example-store2.com',
-      area: 'SHINJUKU', // Area enum key を使用
+      area: '新宿', // AreaMaster の label を使用
       serviceType: 'GIRLS_BAR',
       budgetRange: 'FROM_10K_TO_20K'
     },
@@ -68,7 +68,7 @@ async function main() {
       name: 'ゆい',
       snsLink: 'https://twitter.com/yui_cast',
       storeLink: null,
-      area: 'GINZA', // Area enum key を使用
+      area: '銀座', // AreaMaster の label を使用
       serviceType: 'LOUNGE',
       budgetRange: 'FROM_30K_TO_50K'
     },
@@ -76,7 +76,7 @@ async function main() {
       name: 'りな',
       snsLink: 'https://instagram.com/rina_cast',
       storeLink: 'https://example-store3.com',
-      area: 'ROPPONGI', // Area enum key を使用
+      area: '六本木', // AreaMaster の label を使用
       serviceType: 'CLUB',
       budgetRange: 'OVER_50K'
     },
@@ -84,7 +84,7 @@ async function main() {
       name: 'さくら',
       snsLink: 'https://twitter.com/sakura_cast',
       storeLink: 'https://example-store4.com',
-      area: 'IKEBUKURO', // Area enum key を使用
+      area: '池袋', // AreaMaster の label を使用
       serviceType: 'SNACK',
       budgetRange: 'UNDER_10K'
     },
@@ -92,7 +92,7 @@ async function main() {
       name: 'まい',
       snsLink: 'https://instagram.com/mai_cast',
       storeLink: null,
-      area: 'AKASAKA', // Area enum key を使用
+      area: '赤坂', // AreaMaster の label を使用
       serviceType: 'KYABA',
       budgetRange: 'FROM_20K_TO_30K'
     }
