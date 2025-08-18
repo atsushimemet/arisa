@@ -91,23 +91,23 @@ async function main() {
   const sampleCasts = [
     {
       name: '美咲',
-      snsLink: 'https://twitter.com/misaki_cast',
-      storeLink: 'https://example-store1.com',
+      snsLink: 'https://twitter.com',
+      storeLink: 'https://google.com',
       area: Area.SHIBUYA, // Areaエナムを使用
       serviceType: ServiceType.KYABA,
       budgetRange: BudgetRange.FROM_20K_TO_30K
     },
     {
       name: 'あやか',
-      snsLink: 'https://instagram.com/ayaka_cast',
-      storeLink: 'https://example-store2.com',
+      snsLink: 'https://instagram.com',
+      storeLink: 'https://yahoo.co.jp',
       area: Area.SHINJUKU, // Areaエナムを使用
       serviceType: ServiceType.GIRLS_BAR,
       budgetRange: BudgetRange.FROM_10K_TO_20K
     },
     {
       name: 'ゆい',
-      snsLink: 'https://twitter.com/yui_cast',
+      snsLink: 'https://twitter.com',
       storeLink: null,
       area: Area.GINZA, // Areaエナムを使用
       serviceType: ServiceType.LOUNGE,
@@ -115,23 +115,23 @@ async function main() {
     },
     {
       name: 'りな',
-      snsLink: 'https://instagram.com/rina_cast',
-      storeLink: 'https://example-store3.com',
+      snsLink: 'https://instagram.com',
+      storeLink: 'https://github.com',
       area: Area.ROPPONGI, // Areaエナムを使用
       serviceType: ServiceType.CLUB,
       budgetRange: BudgetRange.OVER_50K
     },
     {
       name: 'さくら',
-      snsLink: 'https://twitter.com/sakura_cast',
-      storeLink: 'https://example-store4.com',
+      snsLink: 'https://twitter.com',
+      storeLink: 'https://youtube.com',
       area: Area.IKEBUKURO, // Areaエナムを使用
       serviceType: ServiceType.SNACK,
       budgetRange: BudgetRange.UNDER_10K
     },
     {
       name: 'まい',
-      snsLink: 'https://instagram.com/mai_cast',
+      snsLink: 'https://instagram.com',
       storeLink: null,
       area: Area.AKASAKA, // Areaエナムを使用
       serviceType: ServiceType.KYABA,

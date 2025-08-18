@@ -101,37 +101,38 @@ npm install
 `.env.local`ファイルを作成し、以下の内容を設定してください：
 
 ```env
-# Database - ローカル開発用（Docker Compose使用時）
-DATABASE_URL="postgresql://arisa_user:arisa_password@localhost:5432/arisa"
-
-# Database - ローカル開発用（SQLite使用時）- 本番用Renderデプロイでは自動設定
-# DATABASE_URL="file:./dev.db"
+# Database - Supabase PostgreSQL
+# SupabaseダッシュボードのSettings > Database > Connection stringから取得
+DATABASE_URL="postgresql://postgres:[YOUR_PASSWORD]@db.[YOUR_PROJECT_REF].supabase.co:5432/postgres"
 
 # NextAuth
 NEXTAUTH_SECRET="your-secret-key-here-change-in-production"
 NEXTAUTH_URL="http://localhost:3000"
 ```
 
-> **注意**: RenderでのデプロイではPostgreSQLが自動的に設定されます。ローカル開発では上記のPostgreSQL設定またはSQLite設定のいずれかを使用できます。
+#### Supabase接続文字列の取得方法：
+1. [Supabase](https://supabase.com/)にログインし、プロジェクトを選択
+2. Settings → Database → Connection string
+3. "URI"タブから接続文字列をコピー
+4. `[YOUR-PASSWORD]`を実際のデータベースパスワードに置き換え
 
-### 3. データベースの起動
+> **注意**: 本番環境では環境変数を安全に管理してください。
+
+### 3. データベースのセットアップ
+
+Supabaseを使用する場合、データベースは既にクラウドで起動しています。
 
 ```bash
-# Docker Composeでデータベースを起動
-docker-compose up -d postgres
-```
-
-### 4. データベースのマイグレーション
-
-```bash
-# Prismaマイグレーションを実行
+# Prismaマイグレーションを実行（Supabaseに対して）
 npm run db:migrate
 
 # シードデータを投入
 npm run db:seed
 ```
 
-### 5. 開発サーバーの起動
+> **注意**: 初回実行時は、SupabaseのダッシュボードでSQL Editorを使用してテーブルが正しく作成されているか確認してください。
+
+### 4. 開発サーバーの起動
 
 ```bash
 npm run dev
