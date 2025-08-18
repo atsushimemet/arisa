@@ -1,20 +1,20 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
-import { MobileConsole } from '@/components/MobileConsole'
+import { MobileConsole, mobileLog } from '@/components/MobileConsole'
 
 interface FormData {
   name: string
   snsLink: string
   storeLink: string
-  area: Area | ''
-  serviceType: ServiceType | ''
-  budgetRange: BudgetRange | ''
+  area: string
+  serviceType: string
+  budgetRange: string
 }
 
 interface FormErrors {
@@ -29,6 +29,10 @@ interface FormErrors {
 export default function AddCastPage() {
   const router = useRouter()
   const { areaOptions, loading: areasLoading, error: areasError } = useAreas()
+  
+  console.log('AddCastPage - areaOptions:', areaOptions)
+  console.log('AddCastPage - areasLoading:', areasLoading)
+  console.log('AddCastPage - areasError:', areasError)
   const [formData, setFormData] = useState<FormData>({
     name: '',
     snsLink: '',
@@ -41,8 +45,17 @@ export default function AddCastPage() {
   const [isDebugConsoleOpen, setIsDebugConsoleOpen] = useState(false)
   const [errors, setErrors] = useState<FormErrors>({})
 
+  useEffect(() => {
+    if (!areasLoading) {
+      console.log('エリア読み込み完了:', areaOptions)
+      mobileLog.info('エリア読み込み完了', { areaOptions, error: areasError })
+    }
+  }, [areasLoading, areaOptions, areasError])
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
+
+    console.log('バリデーション開始:', formData)
 
     if (!formData.name.trim()) {
       newErrors.name = 'キャスト名は必須です'
@@ -70,6 +83,9 @@ export default function AddCastPage() {
       newErrors.budgetRange = '予算帯を選択してください'
     }
 
+    console.log('バリデーション結果:', { newErrors, hasErrors: Object.keys(newErrors).length > 0 })
+    mobileLog.debug('フォームバリデーション', { formData, errors: newErrors })
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -87,10 +103,24 @@ export default function AddCastPage() {
     e.preventDefault()
 
     if (!validateForm()) {
+      console.error('フォームバリデーションに失敗しました')
+      mobileLog.error('フォームバリデーションに失敗しました', { errors })
       return
     }
 
     setLoading(true)
+
+    const requestData = {
+      name: formData.name.trim(),
+      snsLink: formData.snsLink.trim(),
+      storeLink: formData.storeLink.trim() || null,
+      area: formData.area,
+      serviceType: formData.serviceType,
+      budgetRange: formData.budgetRange,
+    }
+
+    console.log('キャスト追加リクエスト:', requestData)
+    mobileLog.info('キャスト追加リクエスト開始', requestData)
 
     try {
       const response = await fetch('/api/casts', {
@@ -98,25 +128,30 @@ export default function AddCastPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          snsLink: formData.snsLink.trim(),
-          storeLink: formData.storeLink.trim() || null,
-          area: formData.area,
-          serviceType: formData.serviceType,
-          budgetRange: formData.budgetRange,
-        }),
+        body: JSON.stringify(requestData),
       })
+
+      console.log('API レスポンス status:', response.status)
+      mobileLog.debug(`API レスポンス status: ${response.status}`)
 
       if (!response.ok) {
         const errorData = await response.json()
+        console.error('API エラーレスポンス:', errorData)
+        mobileLog.error('API エラーレスポンス', errorData)
         throw new Error(errorData.error || 'キャストの追加に失敗しました')
       }
+
+      const result = await response.json()
+      console.log('キャスト追加成功:', result)
+      mobileLog.info('キャスト追加成功', result)
 
       // 成功時は管理者ページに戻る
       router.push('/admin')
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'エラーが発生しました')
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました'
+      console.error('キャスト追加エラー:', err)
+      mobileLog.error('キャスト追加エラー', { error: errorMessage, details: err })
+      alert(errorMessage)
     } finally {
       setLoading(false)
     }
