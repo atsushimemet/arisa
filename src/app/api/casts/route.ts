@@ -64,17 +64,61 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    console.log('キャスト作成リクエスト受信:', body)
+    
     const { name, snsLink, storeLink, area, serviceType, budgetRange } = body
 
-    // バリデーション
-    if (!name || !snsLink || !area || !serviceType || !budgetRange) {
+    // 詳細なバリデーション
+    const missingFields = []
+    if (!name) missingFields.push('name')
+    if (!snsLink) missingFields.push('snsLink')
+    if (!area) missingFields.push('area')
+    if (!serviceType) missingFields.push('serviceType')
+    if (!budgetRange) missingFields.push('budgetRange')
+
+    if (missingFields.length > 0) {
+      const errorMessage = `必須フィールドが不足しています: ${missingFields.join(', ')}`
+      console.error('バリデーションエラー:', errorMessage)
       return NextResponse.json(
-        { error: '必須フィールドが不足しています' },
+        { error: errorMessage },
+        { status: 400 }
+      )
+    }
+
+    // 型の確認
+    console.log('フィールドの型チェック:', {
+      name: typeof name,
+      snsLink: typeof snsLink,
+      storeLink: typeof storeLink,
+      area: typeof area,
+      serviceType: typeof serviceType,
+      budgetRange: typeof budgetRange
+    })
+
+    // 既存のSNSリンクをチェック
+    const existingCast = await prisma.cast.findUnique({
+      where: { snsLink }
+    })
+
+    if (existingCast) {
+      console.error('重複エラー: SNSリンクが既に使用されています:', snsLink)
+      return NextResponse.json(
+        { error: 'このSNSリンクは既に使用されています' },
         { status: 400 }
       )
     }
 
     // キャストを作成
+    console.log('キャスト作成データ:', {
+      name,
+      snsLink,
+      storeLink: storeLink || null,
+      area,
+      serviceType,
+      budgetRange,
+      isActive: true
+    })
+
     const cast = await prisma.cast.create({
       data: {
         name,
@@ -87,11 +131,22 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    console.log('キャスト作成成功:', cast)
     return NextResponse.json(cast, { status: 201 })
   } catch (error) {
-    console.error('Error creating cast:', error)
+    console.error('キャスト作成エラー:', error)
+    
+    // Prismaエラーの詳細を確認
+    if (error && typeof error === 'object' && 'code' in error) {
+      console.error('Prisma エラーコード:', error.code)
+      console.error('Prisma エラーメタ:', error.meta)
+    }
+    
     return NextResponse.json(
-      { error: 'キャストの作成に失敗しました' },
+      { 
+        error: 'キャストの作成に失敗しました',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }
