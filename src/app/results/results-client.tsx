@@ -9,6 +9,75 @@ import { useAreas } from '@/hooks/useAreas'
 import { Search, Filter, RefreshCw, ArrowLeft, Home, Users, Star, MapPin, DollarSign, ExternalLink, Sparkles } from 'lucide-react'
 import { mobileLog } from '@/components/MobileConsole'
 
+// Helper function to handle external links safely
+const openExternalLink = (url: string, linkType: string = 'link') => {
+  try {
+    // Log the attempt for debugging
+    mobileLog.info(`Attempting to open ${linkType}:`, url)
+    
+    // Validate and clean the URL
+    let cleanUrl = url?.trim()
+    if (!cleanUrl) {
+      const message = `${linkType} is empty`
+      console.warn(message)
+      mobileLog.warn(message)
+      return false
+    }
+
+    // Add protocol if missing
+    if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+      cleanUrl = 'https://' + cleanUrl
+      mobileLog.info(`Added https:// protocol. Final URL:`, cleanUrl)
+    }
+
+    // Validate URL format
+    try {
+      new URL(cleanUrl)
+      mobileLog.info(`URL validation passed for:`, cleanUrl)
+    } catch (urlError) {
+      const message = `Invalid URL format for ${linkType}: ${url}`
+      console.error(message, urlError)
+      mobileLog.error(message, urlError)
+      return false
+    }
+
+    // Try multiple methods to open the link
+    mobileLog.info(`Opening link with window.open:`, cleanUrl)
+    const newWindow = window.open(cleanUrl, '_blank', 'noopener,noreferrer')
+    
+    // Check if the window opened successfully
+    if (!newWindow || newWindow.closed) {
+      const message = `Popup blocked for ${linkType}, trying alternative method`
+      console.warn(message)
+      mobileLog.warn(message)
+      
+      // Alternative: create a temporary link and click it
+      const tempLink = document.createElement('a')
+      tempLink.href = cleanUrl
+      tempLink.target = '_blank'
+      tempLink.rel = 'noopener noreferrer'
+      tempLink.style.display = 'none'
+      document.body.appendChild(tempLink)
+      
+      // Use setTimeout to ensure DOM manipulation completes
+      setTimeout(() => {
+        tempLink.click()
+        document.body.removeChild(tempLink)
+        mobileLog.info(`Alternative link method executed for:`, cleanUrl)
+      }, 10)
+    } else {
+      mobileLog.info(`Link opened successfully with window.open:`, cleanUrl)
+    }
+    
+    return true
+  } catch (error) {
+    const message = `Failed to open ${linkType}: ${error}`
+    console.error(message, 'URL:', url)
+    mobileLog.error(message, { error, url })
+    return false
+  }
+}
+
 export function ResultsClient() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -260,32 +329,9 @@ export function ResultsClient() {
                     {cast.snsLink && (
                       <Button
                         onClick={(e) => {
-                          e.preventDefault()
                           e.stopPropagation()
-                          
-                          try {
-                            // Ensure the URL has a protocol
-                            let url = cast.snsLink
-                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-                              url = 'https://' + (url || '')
-                            }
-                            
-                            // Try window.open first
-                            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-                            
-                            // If popup was blocked, fallback to location assignment
-                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                              // Popup blocked, use location.href as fallback
-                              window.location.href = url
-                            }
-                          } catch (error) {
-                            console.error('Failed to open SNS link:', error)
-                            // Fallback to location assignment
-                            let url = cast.snsLink
-                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-                              url = 'https://' + (url || '')
-                            }
-                            window.location.href = url
+                          if (cast.snsLink) {
+                            openExternalLink(cast.snsLink, 'SNS link')
                           }
                         }}
                         variant="primary"
@@ -299,32 +345,9 @@ export function ResultsClient() {
                     {cast.storeLink && (
                       <Button
                         onClick={(e) => {
-                          e.preventDefault()
                           e.stopPropagation()
-                          
-                          try {
-                            // Ensure the URL has a protocol
-                            let url = cast.storeLink
-                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-                              url = 'https://' + (url || '')
-                            }
-                            
-                            // Try window.open first
-                            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-                            
-                            // If popup was blocked, fallback to location assignment
-                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                              // Popup blocked, use location.href as fallback
-                              window.location.href = url
-                            }
-                          } catch (error) {
-                            console.error('Failed to open store link:', error)
-                            // Fallback to location assignment
-                            let url = cast.storeLink
-                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-                              url = 'https://' + (url || '')
-                            }
-                            window.location.href = url
+                          if (cast.storeLink) {
+                            openExternalLink(cast.storeLink, 'Store link')
                           }
                         }}
                         variant="outline"
