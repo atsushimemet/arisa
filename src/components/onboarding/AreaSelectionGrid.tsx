@@ -142,11 +142,11 @@ export const AreaSelectionGrid: React.FC<AreaSelectionGridProps> = ({
                           </h4>
                           
                           {/* Hover effect overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-glow-primary/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-glow-primary/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                           
                           {/* Selection pulse effect */}
                           {isSelected && (
-                            <div className="absolute inset-0 bg-glow-primary/10 rounded-xl animate-pulse" />
+                            <div className="absolute inset-0 bg-glow-primary/10 rounded-xl animate-pulse pointer-events-none" />
                           )}
                         </Card>
                       </div>
