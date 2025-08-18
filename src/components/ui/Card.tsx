@@ -97,7 +97,7 @@ export const Card: React.FC<CardProps> = ({
 
       {/* iOS-style subtle hover indicator */}
       {variant === 'glass' && isHovered && (
-        <div className="absolute inset-0 bg-gradient-to-t from-ios-blue/5 to-transparent rounded-ios-lg" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ios-blue/5 to-transparent rounded-ios-lg pointer-events-none" />
       )}
     </div>
   )

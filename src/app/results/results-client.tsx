@@ -361,10 +361,10 @@ export function ResultsClient() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-laser-green/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-laser-green/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
                   {/* Sparkle effect on hover */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <Sparkles className="w-6 h-6 text-game-gold animate-bounce-glow" />
                   </div>
                 </Card>
