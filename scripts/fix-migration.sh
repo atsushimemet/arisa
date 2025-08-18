@@ -51,7 +51,7 @@ check_migration_status() {
 
 # Function to resolve the specific failed migration
 resolve_specific_migration() {
-  local migration_name="20250817023012_init"
+  local migration_name="20250817173110_init"
   
   print_status "Attempting to resolve failed migration: $migration_name"
   
@@ -83,7 +83,7 @@ force_schema_sync() {
     print_success "Schema pushed to database successfully."
     
     # Mark migration as applied after schema push
-    if npx prisma migrate resolve --applied "20250817023012_init" 2>&1; then
+    if npx prisma migrate resolve --applied "20250817173110_init" 2>&1; then
       print_success "Migration marked as applied after schema push."
       return 0
     else
