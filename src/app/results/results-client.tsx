@@ -259,9 +259,33 @@ export function ResultsClient() {
                   <div className="space-y-3">
                     {cast.snsLink && (
                       <Button
-                        onClick={() => {
-                          if (cast.snsLink) {
-                            window.open(cast.snsLink, '_blank', 'noopener,noreferrer')
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          
+                          try {
+                            // Ensure the URL has a protocol
+                            let url = cast.snsLink
+                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                              url = 'https://' + url
+                            }
+                            
+                            // Try window.open first
+                            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+                            
+                            // If popup was blocked, fallback to location assignment
+                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                              // Popup blocked, use location.href as fallback
+                              window.location.href = url
+                            }
+                          } catch (error) {
+                            console.error('Failed to open SNS link:', error)
+                            // Fallback to location assignment
+                            let url = cast.snsLink
+                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                              url = 'https://' + url
+                            }
+                            window.location.href = url
                           }
                         }}
                         variant="primary"
@@ -274,9 +298,33 @@ export function ResultsClient() {
                     )}
                     {cast.storeLink && (
                       <Button
-                        onClick={() => {
-                          if (cast.storeLink) {
-                            window.open(cast.storeLink, '_blank', 'noopener,noreferrer')
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          
+                          try {
+                            // Ensure the URL has a protocol
+                            let url = cast.storeLink
+                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                              url = 'https://' + url
+                            }
+                            
+                            // Try window.open first
+                            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+                            
+                            // If popup was blocked, fallback to location assignment
+                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                              // Popup blocked, use location.href as fallback
+                              window.location.href = url
+                            }
+                          } catch (error) {
+                            console.error('Failed to open store link:', error)
+                            // Fallback to location assignment
+                            let url = cast.storeLink
+                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                              url = 'https://' + url
+                            }
+                            window.location.href = url
                           }
                         }}
                         variant="outline"
