@@ -15,10 +15,10 @@ check_p3009_error() {
 
 # Function to mark specific failed migration as applied
 resolve_failed_migration() {
-  echo "Marking failed migration 20250817023012_init as applied..."
+  echo "Marking failed migration 20250817173110_init as applied..."
   
   # First, try to resolve the specific failed migration
-  if npx prisma migrate resolve --applied 20250817023012_init 2>&1; then
+  if npx prisma migrate resolve --applied 20250817173110_init 2>&1; then
     echo "Successfully marked migration as applied."
     
     # Verify the resolution worked
@@ -44,7 +44,7 @@ force_schema_sync() {
     echo "Schema pushed successfully."
     
     # Mark the migration as applied after successful schema push
-    if npx prisma migrate resolve --applied 20250817023012_init 2>&1; then
+    if npx prisma migrate resolve --applied 20250817173110_init 2>&1; then
       echo "Migration marked as applied after schema push."
       return 0
     else
