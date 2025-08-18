@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Card } from '../ui/Card'
-import { Check, MapPin } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 
 interface AreaOption {
   value: string

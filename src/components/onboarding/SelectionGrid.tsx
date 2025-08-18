@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from '../ui/Card'
-import { Check } from 'lucide-react'
+// Check import removed as it's not used
 
 interface SelectionOption {
   value: string

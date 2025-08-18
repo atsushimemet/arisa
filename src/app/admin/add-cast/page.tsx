@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Area, ServiceType, BudgetRange, SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
+import { SERVICE_TYPE_LABELS, BUDGET_RANGE_LABELS } from '@/types'
 import { useAreas } from '@/hooks/useAreas'
 import { MobileConsole, mobileLog } from '@/components/MobileConsole'
 
