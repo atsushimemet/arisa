@@ -119,7 +119,7 @@ export default function AdminPage() {
               className="px-3 py-2 sm:px-4 text-lg"
               title="新しいキャストを追加"
             >
-              ➕
+              追加
             </Button>
             <Button 
               onClick={() => router.push('/admin/areas')}
@@ -187,7 +187,7 @@ export default function AdminPage() {
                 onClick={() => router.push('/admin/add-cast')}
                 variant="primary"
               >
-                キャストを追加
+                追加
               </Button>
             </Card>
           ) : (
