@@ -33,7 +33,7 @@ check_area_type_exists() {
   # Query to check if Area type exists
   QUERY="SELECT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'Area');"
   
-  if RESULT=$(npx prisma db execute --stdin <<< "$QUERY" 2>/dev/null); then
+  if RESULT=$(echo "$QUERY" | npx prisma db execute --stdin 2>/dev/null); then
     if echo "$RESULT" | grep -q "true"; then
       print_warning "Area type already exists in database."
       return 0
