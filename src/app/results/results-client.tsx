@@ -255,17 +255,36 @@ export function ResultsClient() {
                     
                   </div>
 
-                  {/* Social links */}
+                  {/* Action buttons */}
                   <div className="space-y-3">
                     {cast.snsLink && (
                       <Button
-                        onClick={() => window.open(cast.snsLink, '_blank')}
+                        onClick={() => {
+                          if (cast.snsLink) {
+                            window.open(cast.snsLink, '_blank', 'noopener,noreferrer')
+                          }
+                        }}
                         variant="primary"
                         size="sm"
                         className="w-full"
                         icon={<ExternalLink className="w-4 h-4" />}
                       >
                         SNS で確認
+                      </Button>
+                    )}
+                    {cast.storeLink && (
+                      <Button
+                        onClick={() => {
+                          if (cast.storeLink) {
+                            window.open(cast.storeLink, '_blank', 'noopener,noreferrer')
+                          }
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                        icon={<ExternalLink className="w-4 h-4" />}
+                      >
+                        店舗ページを見る
                       </Button>
                     )}
                   </div>
