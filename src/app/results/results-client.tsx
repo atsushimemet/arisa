@@ -266,8 +266,8 @@ export function ResultsClient() {
                           try {
                             // Ensure the URL has a protocol
                             let url = cast.snsLink
-                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                              url = 'https://' + url
+                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+                              url = 'https://' + (url || '')
                             }
                             
                             // Try window.open first
@@ -282,8 +282,8 @@ export function ResultsClient() {
                             console.error('Failed to open SNS link:', error)
                             // Fallback to location assignment
                             let url = cast.snsLink
-                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                              url = 'https://' + url
+                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+                              url = 'https://' + (url || '')
                             }
                             window.location.href = url
                           }
@@ -305,8 +305,8 @@ export function ResultsClient() {
                           try {
                             // Ensure the URL has a protocol
                             let url = cast.storeLink
-                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                              url = 'https://' + url
+                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+                              url = 'https://' + (url || '')
                             }
                             
                             // Try window.open first
@@ -321,8 +321,8 @@ export function ResultsClient() {
                             console.error('Failed to open store link:', error)
                             // Fallback to location assignment
                             let url = cast.storeLink
-                            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                              url = 'https://' + url
+                            if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+                              url = 'https://' + (url || '')
                             }
                             window.location.href = url
                           }
